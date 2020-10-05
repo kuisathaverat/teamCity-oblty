@@ -6,7 +6,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 version = "2019.2"
 
 project {
-    vcsRoot(ObltVcs)
+    vcsRoot(Observability_BuildConfVcs)
     buildType(Build)
 }
 
@@ -16,6 +16,9 @@ object Build : BuildType({
 
     vcs {
         root(BuildConfVcs)
+        checkoutMode = CheckoutMode.ON_AGENT
+        checkoutDir = "src"
+        cleanCheckout = true
     }
     steps {
         script {
@@ -32,7 +35,7 @@ object Build : BuildType({
     }
 })
 
-object ObltVcs : GitVcsRoot({
+object Observability_BuildConfVcs : GitVcsRoot({
     name = "ObltVcs"
     url = "https://github.com/kuisathaverat/teamCity-oblty.git"
 })
