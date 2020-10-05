@@ -4,7 +4,7 @@ Test Project for TemaCity
 * Create the Project in TeamCity UI
     * Configure VCS Roots
       * Add a new repo configuration
-    * Configure "Versioned Settings"
+    * Configure **Versioned Settings**
       * Synchronization enabled
       * use settings from VCS
       * Push changes to the repo with **Commit current project settings…** button
@@ -32,5 +32,9 @@ Test Project for TemaCity
   }
   ```
 * Push the changes to the repo
-* Go
+* Update the project configuration on TeamCity UI 
+    * Open the project in TeamCity UI
+    * Go to **Versioned Settings** to the tab **Change log**
+    * Check for changes by click on **Check for changes** button
+
 
