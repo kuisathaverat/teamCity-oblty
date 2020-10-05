@@ -77,7 +77,7 @@ object BasicFromGit : BuildType({
     }
     steps {
         script {
-            scriptContent = "ls -la"
+            scriptContent = """echo 'Hello'"""
         }
     }
     triggers {
