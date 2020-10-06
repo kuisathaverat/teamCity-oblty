@@ -26,7 +26,7 @@ class ApmProject: Project ({
     id("apm_project")
     name = "APM"
 
-    template(DefaultTemplate())
+    defaultTemplate = DefaultTemplate
 
     subProject(ApmAgentsProject())
     subProject(ApmServerProject())

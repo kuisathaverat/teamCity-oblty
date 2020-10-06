@@ -18,6 +18,7 @@
 import apm.ApmProject
 import beats.BeatsProject
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import shared.DefaultTemplate
 import shared.SharedProject
 
 /*
@@ -45,6 +46,8 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
+    template(DefaultTemplate)
+
     subProject(ApmProject())
     subProject(BeatsProject())
     subProject(SharedProject())

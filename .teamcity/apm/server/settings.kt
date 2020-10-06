@@ -24,7 +24,7 @@ class ApmServerProject: Project ({
     id("apm_server_project")
     name = "APM Server"
 
-    template(DefaultTemplate())
+    defaultTemplate = DefaultTemplate
 
     vcsRoot(ApmServerVcs)
     buildType(ApmServer())

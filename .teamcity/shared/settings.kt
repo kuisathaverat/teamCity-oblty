@@ -23,5 +23,5 @@ class SharedProject: Project({
     id("shared_project")
     name = "Shared"
 
-    template(DefaultTemplate())
+    defaultTemplate = DefaultTemplate
 })

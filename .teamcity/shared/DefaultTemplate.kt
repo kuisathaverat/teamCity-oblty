@@ -22,8 +22,7 @@ package shared
 import jetbrains.buildServer.configs.kotlin.v2019_2.Template
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.perfmon
 
-class DefaultTemplate : Template({
-    id("DefaultTemplate")
+object DefaultTemplate: Template({
     name = "Default Template"
 
     params {

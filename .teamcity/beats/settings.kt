@@ -24,5 +24,5 @@ class BeatsProject: Project({
     id("beats_project")
     name = "Beats"
 
-    template(DefaultTemplate())
+    defaultTemplate = DefaultTemplate
 })

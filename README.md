@@ -187,3 +187,54 @@ project {
     subProject(ApmServerProject())
 }
 ```
+
+# Templates
+
+You should instantiate the template in the project scope you will use it,
+if you define it on the root level you can use it on all the subprojects.
+
+Template definition
+```
+object DefaultTemplate: Template({
+    name = "Default Template"
+
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
+    features {
+        perfmon { }
+    }
+
+    failureConditions {
+        executionTimeoutMin = 120
+    }
+})
+```
+
+Template instantiation (at root level for example)
+
+```
+
+project {
+    template(DefaultTemplate)
+
+    subProject(ApmProject())
+    subProject(BeatsProject())
+    subProject(SharedProject())
+}
+```
+
+
+Template used in a project
+```
+class ApmServerProject: Project ({
+    id("apm_server_project")
+    name = "APM Server"
+
+    defaultTemplate = DefaultTemplate
+
+    vcsRoot(ApmServerVcs)
+    buildType(ApmServer())
+})
+```
