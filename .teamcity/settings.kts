@@ -48,7 +48,6 @@ val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
 val pythonVersions = listOf("2.7", "3.5", "3.7")
 
 project {
-    name = "_Root"
     vcsRoot(BuildConfVcs)
     buildType(ApmAgentPythonMain)
     operatingSystems.forEach() {os ->
@@ -68,9 +67,11 @@ project {
         }
     }
     subProject {
+        id("APM")
         name = "APM"
     }
     subProject {
+        id("Beats")
         name = "Beats"
     }
 }
