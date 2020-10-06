@@ -45,6 +45,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
+    vcsRoot(BuildConfVcs)
     buildType(Basic)
     buildType(BasicFromGit)
 }
@@ -90,8 +91,13 @@ object BasicFromGit : BuildType({
     }
 })
 
+object Observability_VCS : GitVcsRoot({
+    name = "ObltProject"
+    url = "https://github.com/kuisathaverat/teamCity-oblty.git"
+})
+
 object BuildConfVcs : GitVcsRoot({
-    name = "PetclinicVcs"
+    name = "APMAgentPython"
     url = "https://github.com/elastic/apm-agent-python.git"
 })
 
