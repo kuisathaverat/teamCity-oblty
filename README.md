@@ -94,7 +94,7 @@ project {
 }
 ```
 
-# Dynamic Parallel jobs
+# Dynamic Parallel Build configurations
 
 ```
 val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
