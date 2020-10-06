@@ -46,8 +46,14 @@ version = "2020.1"
 
 project {
     vcsRoot(BuildConfVcs)
-    buildType(Basic)
-    buildType(BasicFromGit)
+    sequential {
+        buildType(Basic)
+        buildType(BasicFromGit)
+        parallel {
+            buildType(Basic)
+            buildType(BasicFromGit)
+        }
+    }
 }
 
 object Basic : BuildType({
@@ -100,4 +106,5 @@ object BuildConfVcs : GitVcsRoot({
     name = "APMAgentPython"
     url = "https://github.com/elastic/apm-agent-python.git"
 })
+
 
