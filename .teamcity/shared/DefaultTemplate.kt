@@ -23,6 +23,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.Template
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.perfmon
 
 object DefaultTemplate : Template({
+    id("DefaultTemplate")
     name = "Default Template"
 
     params {
