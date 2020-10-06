@@ -23,7 +23,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
-val pythonVersions = listOf("2.7", "3.5", "3.7")
+val pythonVersions = listOf("2.7", "3.5", "3.7", "3.8")
 
 class ApmAgentPythonProject: Project ({
     id("apm_agent_python_project")
