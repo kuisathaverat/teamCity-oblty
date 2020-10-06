@@ -85,7 +85,7 @@ object ApmAgentPythonMain : BuildType({
 })
 
 class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
-    id("APM_agent_Python_${os}_${version}")
+    id("APM_agent_Python_${os}_${version}".toId())
     name = "Agent Python ${os} ${version}"
 
     vcs {
