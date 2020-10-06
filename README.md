@@ -18,31 +18,31 @@ Test Project for TemaCity
   
   ...
   
-  project {
+    project {
       // repository to save project changes (this repo)
       vcsRoot(BuildConfVcs)
-  
+    
       // Build configuration 
       buildType(MyTest)
-  }
+    }
   
   ...
   
-  object MyTest : BuildType({
+    object MyTest : BuildType({
       name = "Build"
       steps {
           script {
               scriptContent = "echo 'Hello world'"
           }
       }
-  }
+    }
   
   ...
   
-object BuildConfVcs : GitVcsRoot({
-    name = "APMAgentPython"
-    url = "https://github.com/elastic/apm-agent-python.git"
-})
+    object BuildConfVcs : GitVcsRoot({
+        name = "APMAgentPython"
+        url = "https://github.com/elastic/apm-agent-python.git"
+    })
   ```
 * Push the changes to the repo
 * Update the project configuration on TeamCity UI 
@@ -128,5 +128,60 @@ class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
     name = "Agent Python ${os} ${version}"
 
 ...
+}
+```
+
+# SubProjects
+
+We create one folder per subproject, on each subfolder there are a file `settings.kt`
+This file defines the project and first level subproject in that folder.
+The reason to use the same name for the file is to have a common structure along all folders.
+Also have the configuration of each project in its folders 
+makes easy to find the configuration and edit it.
+
+![](./images/project_files.png)
+
+The settings.kt file looks like the following
+
+```
+package apm.server
+
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
+
+class ApmServerProject: Project ({
+    id("apm_project")
+    name = "APM"
+})
+
+object BuildConfVcs : GitVcsRoot({
+    name = "APMServer"
+    url = "https://github.com/elastic/apm-server.git"
+})
+```
+
+The Project class defined in that file is used in the upper level to import as subproject.
+
+root `settings.kts` (notices the 's' at the end)
+```
+import apm.ApmProject
+import beats.BeatsProject
+
+version = "2020.1"
+
+project {
+    subProject(ApmProject())
+    subProject(BeatsProject())
+}
+```
+
+Apm project `settings.kt`
+```
+import apm.agents.ApmAgentsProject
+import apm.agents.ApmServerProject
+
+project {
+    subProject(ApmAgentsProject())
+    subProject(ApmServerProject())
 }
 ```

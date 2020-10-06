@@ -15,11 +15,10 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import apm.ApmProject
+import beats.BeatsProject
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
-import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
-import APM.*
+import shared.SharedProject
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -46,12 +45,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
-    subProject {
-        id("APM")
-        name = "APM"
-    }
-    subProject {
-        id("Beats")
-        name = "Beats"
-    }
+    subProject(ApmProject())
+    subProject(BeatsProject())
+    subProject(SharedProject())
 }

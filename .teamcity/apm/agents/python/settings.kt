@@ -15,19 +15,19 @@
 // specific language governing permissions and limitations
 // under the License.
 
+package apm.agents.python
+
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
-version = "2020.1"
-
 val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
 val pythonVersions = listOf("2.7", "3.5", "3.7")
 
-Project {
-    id("APM")
-    name = "APM"
+class ApmAgentPythonProject: Project ({
+    id("apm_agent_python_project")
+    name = "APM Agent Python"
 
     vcsRoot(BuildConfVcs)
     buildType(ApmAgentPythonMain)
@@ -47,7 +47,7 @@ Project {
             }
         }
     }
-}
+})
 
 
 object ApmAgentPythonMain : BuildType({
