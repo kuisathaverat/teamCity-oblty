@@ -29,7 +29,7 @@ class ApmAgentPythonProject: Project ({
     id("apm_agent_python_project")
     name = "APM Agent Python"
 
-    vcsRoot(BuildConfVcs)
+    vcsRoot(ApmAgentPythonVcs)
     buildType(ApmAgentPythonMain)
     operatingSystems.forEach() {os ->
         pythonVersions.forEach(){ version ->
@@ -71,7 +71,7 @@ class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
     name = "Agent Python ${os} ${version}"
 
     vcs {
-        root(BuildConfVcs)
+        root(ApmAgentPythonVcs)
         checkoutMode = CheckoutMode.ON_AGENT
         checkoutDir = "src"
         cleanCheckout = true
@@ -94,7 +94,7 @@ class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
     }
 })
 
-object BuildConfVcs : GitVcsRoot({
+object ApmAgentPythonVcs : GitVcsRoot({
     name = "APMAgentPython"
     url = "https://github.com/elastic/apm-agent-python.git"
 })

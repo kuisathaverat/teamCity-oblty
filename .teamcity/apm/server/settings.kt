@@ -17,7 +17,6 @@
 
 package apm.server
 
-import apm.agents.python.BuildConfVcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
@@ -25,10 +24,10 @@ class ApmServerProject: Project ({
     id("apm_server_project")
     name = "APM Server"
 
-    vcsRoot(BuildConfVcs)
+    vcsRoot(ApmServerVcs)
 })
 
-object BuildConfVcs : GitVcsRoot({
+object ApmServerVcs : GitVcsRoot({
     name = "APMServer"
     url = "https://github.com/elastic/apm-server.git"
 })
