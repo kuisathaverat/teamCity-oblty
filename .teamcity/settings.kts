@@ -50,8 +50,10 @@ project {
     buildType(BasicFromGit)
 
     sequential {
-        buildType(Basic)
-        buildType(BasicFromGit)
+        parallel {
+            buildType(Basic)
+            buildType(BasicFromGit)
+        }
     }
 }
 

@@ -54,7 +54,7 @@ Test Project for TemaCity
 A TeamCity project is like a folder in Jenkins and it contains subprojects(Jenkins folders)
 and build configurations (Jobs). 
 
-# sequential Build configurations
+# Sequential Build configurations
 
 ```
 project {
@@ -68,6 +68,27 @@ project {
     sequential {
         buildType(Basic)
         buildType(BasicFromGit)
+    }
+}
+```
+
+# Parallel Build configurations
+
+```
+project {
+    vcsRoot(BuildConfVcs)
+
+    // You have to define the build configurations
+    buildType(Basic)
+    buildType(BasicFromGit)
+
+    // You set the way to execute them
+    sequential {
+        // parallel should be inside a sequential block
+        parallel {
+            buildType(Basic)
+            buildType(BasicFromGit)
+        }
     }
 }
 ```
