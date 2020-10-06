@@ -14,11 +14,12 @@ Test Project for TemaCity
   ```
   import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
   
+  [![300](https://img.shields.io/badge/300%20-red)](#)
+  
   ...
   
   project {
       // repository to save project changes (this repo)
-      // this is needed to mantaing the project in sync
       vcsRoot(BuildConfVcs)
   
       // Build configuration 
@@ -38,10 +39,10 @@ Test Project for TemaCity
   
   ...
   
-  object Observability_VCS : GitVcsRoot({
-      name = "ObltProject"
-      url = "https://github.com/kuisathaverat/teamCity-oblty.git"
-  })
+object BuildConfVcs : GitVcsRoot({
+    name = "APMAgentPython"
+    url = "https://github.com/elastic/apm-agent-python.git"
+})
   ```
 * Push the changes to the repo
 * Update the project configuration on TeamCity UI 

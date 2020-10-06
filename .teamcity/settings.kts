@@ -44,27 +44,38 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2020.1"
 
+val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
+val pythonVersions = listOf("2.7", "3.5", "3.7")
+
 project {
     vcsRoot(BuildConfVcs)
-    buildType(Basic)
-    buildType(BasicFromGit)
+    buildType(ApmAgentPythonMain)
+    operatingSystems.forEach() {os ->
+        pythonVersions.forEach(){ version ->
+            buildType(ApmAgentPythonAxis(os, version))
+        }
+    }
 
     sequential {
+        buildType(ApmAgentPythonMain)
         parallel {
-            buildType(Basic)
-            buildType(BasicFromGit)
+            operatingSystems.forEach() {os ->
+                pythonVersions.forEach(){ version ->
+                    buildType(ApmAgentPythonAxis(os, version))
+                }
+            }
         }
     }
 }
 
-object Basic : BuildType({
-    name = "basic"
-    description = "basic test"
+object ApmAgentPythonMain : BuildType({
+    name = "APM Agent Python"
+    description = "Run all Build configurations"
 
     steps {
         script {
             name = "shell"
-            scriptContent = """echo "hello""""
+            scriptContent = """echo "NOOP""""
         }
     }
 
@@ -73,9 +84,9 @@ object Basic : BuildType({
     }
 })
 
-object BasicFromGit : BuildType({
-    name = "BasicGit"
-    artifactRules = "target/*jar"
+class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
+    id("APM_agent_Python_${os}_${version}")
+    name = "Agent Python ${os} ${version}"
 
     vcs {
         root(BuildConfVcs)
@@ -83,29 +94,25 @@ object BasicFromGit : BuildType({
         checkoutDir = "src"
         cleanCheckout = true
     }
+
     steps {
         script {
-            scriptContent = """echo 'Hello'"""
+            scriptContent = """echo '${os} - ${version}'"""
         }
     }
+
     triggers {
         vcs {
             groupCheckinsByCommitter = true
         }
     }
+
     requirements {
         contains("teamcity.agent.name", "ubuntu-16")
     }
-})
-
-object Observability_VCS : GitVcsRoot({
-    name = "ObltProject"
-    url = "https://github.com/kuisathaverat/teamCity-oblty.git"
 })
 
 object BuildConfVcs : GitVcsRoot({
     name = "APMAgentPython"
     url = "https://github.com/elastic/apm-agent-python.git"
 })
-
-
