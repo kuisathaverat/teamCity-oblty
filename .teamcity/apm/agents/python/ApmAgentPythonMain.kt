@@ -18,34 +18,20 @@
 package apm.agents.python
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import shared.DefaultTemplate
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
-val pythonVersions = listOf("2.7", "3.5", "3.7", "3.8")
-
-class ApmAgentPythonProject: Project ({
-    id("apm_agent_python_project")
+class ApmAgentPythonMain : BuildType({
     name = "APM Agent Python"
+    description = "Run all Build configurations"
 
-    template(DefaultTemplate)
-
-    vcsRoot(ApmAgentPythonVcs)
-    buildType(ApmAgentPythonMain())
-    operatingSystems.forEach() {os ->
-        pythonVersions.forEach(){ version ->
-            buildType(ApmAgentPythonAxis(os, version))
+    steps {
+        script {
+            name = "shell"
+            scriptContent = """echo "NOOP""""
         }
     }
 
-    sequential {
-        buildType(ApmAgentPythonMain())
-        parallel {
-            operatingSystems.forEach() {os ->
-                pythonVersions.forEach(){ version ->
-                    buildType(ApmAgentPythonAxis(os, version))
-                }
-            }
-        }
+    requirements {
+        contains("teamcity.agent.name", "ubuntu-16")
     }
 })
-

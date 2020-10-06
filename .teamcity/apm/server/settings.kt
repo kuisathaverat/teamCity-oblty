@@ -18,47 +18,15 @@
 package apm.server
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
-import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
+import shared.DefaultTemplate
 
 class ApmServerProject: Project ({
     id("apm_server_project")
     name = "APM Server"
 
+    template(DefaultTemplate)
+
     vcsRoot(ApmServerVcs)
     buildType(ApmServer())
 })
 
-class ApmServer() : BuildType ({
-    id("APM_server".toId())
-    name = "Agent Server"
-
-    vcs {
-        root(ApmServerVcs)
-        checkoutMode = CheckoutMode.ON_AGENT
-        checkoutDir = "src"
-        cleanCheckout = true
-    }
-
-    steps {
-        script {
-            scriptContent = """echo 'Hello'"""
-        }
-    }
-
-    triggers {
-        vcs {
-            groupCheckinsByCommitter = true
-        }
-    }
-
-    requirements {
-        contains("teamcity.agent.name", "ubuntu-16")
-    }
-})
-
-object ApmServerVcs : GitVcsRoot({
-    name = "APMServer"
-    url = "https://github.com/elastic/apm-server.git"
-})

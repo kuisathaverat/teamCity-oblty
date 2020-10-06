@@ -22,4 +22,6 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 class SharedProject: Project({
     id("shared_project")
     name = "Shared"
+
+    template(DefaultTemplate)
 })

@@ -15,37 +15,36 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package apm.agents.python
+package apm.server
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import shared.DefaultTemplate
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
-val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
-val pythonVersions = listOf("2.7", "3.5", "3.7", "3.8")
+class ApmServer() : BuildType ({
+    id("APM_server".toId())
+    name = "Agent Server"
 
-class ApmAgentPythonProject: Project ({
-    id("apm_agent_python_project")
-    name = "APM Agent Python"
+    vcs {
+        root(ApmServerVcs)
+        checkoutMode = CheckoutMode.ON_AGENT
+        checkoutDir = "src"
+        cleanCheckout = true
+    }
 
-    template(DefaultTemplate)
-
-    vcsRoot(ApmAgentPythonVcs)
-    buildType(ApmAgentPythonMain())
-    operatingSystems.forEach() {os ->
-        pythonVersions.forEach(){ version ->
-            buildType(ApmAgentPythonAxis(os, version))
+    steps {
+        script {
+            scriptContent = """echo 'Hello'"""
         }
     }
 
-    sequential {
-        buildType(ApmAgentPythonMain())
-        parallel {
-            operatingSystems.forEach() {os ->
-                pythonVersions.forEach(){ version ->
-                    buildType(ApmAgentPythonAxis(os, version))
-                }
-            }
+    triggers {
+        vcs {
+            groupCheckinsByCommitter = true
         }
+    }
+
+    requirements {
+        contains("teamcity.agent.name", "ubuntu-16")
     }
 })
-

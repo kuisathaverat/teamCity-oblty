@@ -19,10 +19,13 @@ package apm.agents
 
 import apm.agents.python.ApmAgentPythonProject
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import shared.DefaultTemplate
 
 class ApmAgentsProject: Project ({
     id("apm_agents_project")
     name = "APM Agents"
+
+    template(DefaultTemplate)
 
     subProject(ApmAgentPythonProject())
 })

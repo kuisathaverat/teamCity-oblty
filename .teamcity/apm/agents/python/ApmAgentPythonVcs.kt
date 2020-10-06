@@ -15,19 +15,11 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package apm
+package apm.agents.python
 
-import apm.agents.ApmAgentsProject
-import apm.server.ApmServerProject
-import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import shared.DefaultTemplate
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
-class ApmProject: Project ({
-    id("apm_project")
-    name = "APM"
-
-    template(DefaultTemplate)
-
-    subProject(ApmAgentsProject())
-    subProject(ApmServerProject())
+object ApmAgentPythonVcs : GitVcsRoot({
+    name = "APMAgentPython"
+    url = "https://github.com/elastic/apm-agent-python.git"
 })

@@ -18,8 +18,11 @@
 package beats
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import shared.DefaultTemplate
 
 class BeatsProject: Project({
     id("beats_project")
     name = "Beats"
+
+    template(DefaultTemplate)
 })
