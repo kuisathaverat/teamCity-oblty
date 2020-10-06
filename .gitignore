@@ -1,3 +1,4 @@
 .teamcity/Basic_dsl.iml
 .teamcity/target
 .idea
+.DS_Store
