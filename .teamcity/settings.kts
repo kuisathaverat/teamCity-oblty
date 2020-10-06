@@ -19,6 +19,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
+import APM.*
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -44,28 +45,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2020.1"
 
-val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
-val pythonVersions = listOf("2.7", "3.5", "3.7")
-
 project {
-    vcsRoot(BuildConfVcs)
-    buildType(ApmAgentPythonMain)
-    operatingSystems.forEach() {os ->
-        pythonVersions.forEach(){ version ->
-            buildType(ApmAgentPythonAxis(os, version))
-        }
-    }
-
-    sequential {
-        buildType(ApmAgentPythonMain)
-        parallel {
-            operatingSystems.forEach() {os ->
-                pythonVersions.forEach(){ version ->
-                    buildType(ApmAgentPythonAxis(os, version))
-                }
-            }
-        }
-    }
     subProject {
         id("APM")
         name = "APM"
@@ -75,52 +55,3 @@ project {
         name = "Beats"
     }
 }
-
-object ApmAgentPythonMain : BuildType({
-    name = "APM Agent Python"
-    description = "Run all Build configurations"
-
-    steps {
-        script {
-            name = "shell"
-            scriptContent = """echo "NOOP""""
-        }
-    }
-
-    requirements {
-        contains("teamcity.agent.name", "ubuntu-16")
-    }
-})
-
-class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
-    id("APM_agent_Python_${os}_${version}".toId())
-    name = "Agent Python ${os} ${version}"
-
-    vcs {
-        root(BuildConfVcs)
-        checkoutMode = CheckoutMode.ON_AGENT
-        checkoutDir = "src"
-        cleanCheckout = true
-    }
-
-    steps {
-        script {
-            scriptContent = """echo '${os} - ${version}'"""
-        }
-    }
-
-    triggers {
-        vcs {
-            groupCheckinsByCommitter = true
-        }
-    }
-
-    requirements {
-        contains("teamcity.agent.name", "ubuntu-16")
-    }
-})
-
-object BuildConfVcs : GitVcsRoot({
-    name = "APMAgentPython"
-    url = "https://github.com/elastic/apm-agent-python.git"
-})
