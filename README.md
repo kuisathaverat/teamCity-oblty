@@ -93,3 +93,40 @@ project {
     }
 }
 ```
+
+# Dynamic Parallel jobs
+
+```
+val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
+val pythonVersions = listOf("2.7", "3.5", "3.7")
+
+project {
+    vcsRoot(BuildConfVcs)
+    buildType(ApmAgentPythonMain)
+    operatingSystems.forEach() {os ->
+        pythonVersions.forEach(){ version ->
+            buildType(ApmAgentPythonAxis(os, version))
+        }
+    }
+
+    sequential {
+        buildType(ApmAgentPythonMain)
+        parallel {
+            operatingSystems.forEach() {os ->
+                pythonVersions.forEach(){ version ->
+                    buildType(ApmAgentPythonAxis(os, version))
+                }
+            }
+        }
+    }
+}
+
+...
+
+class ApmAgentPythonAxis(val os: String, val version: String) : BuildType ({
+    id("APM_agent_Python_${os}_${version}".toId())
+    name = "Agent Python ${os} ${version}"
+
+...
+}
+```
