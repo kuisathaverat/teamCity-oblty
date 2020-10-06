@@ -17,6 +17,11 @@ Test Project for TemaCity
   ...
   
   project {
+      // repository to save project changes (this repo)
+      // this is needed to mantaing the project in sync
+      vcsRoot(BuildConfVcs)
+  
+      // Build configuration 
       buildType(MyTest)
   }
   
@@ -30,6 +35,13 @@ Test Project for TemaCity
           }
       }
   }
+  
+  ...
+  
+  object Observability_VCS : GitVcsRoot({
+      name = "ObltProject"
+      url = "https://github.com/kuisathaverat/teamCity-oblty.git"
+  })
   ```
 * Push the changes to the repo
 * Update the project configuration on TeamCity UI 
@@ -38,3 +50,5 @@ Test Project for TemaCity
     * Check for changes by click on **Check for changes** button
 
 
+A TeamCity project is like a folder in Jenkins and it contains subprojects(Jenkins folders)
+and build configurations (Jobs). 
