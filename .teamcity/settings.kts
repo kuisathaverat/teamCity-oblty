@@ -56,10 +56,6 @@ project {
 }
 
 object Basic : BuildType({
-
-})
-
-object Basic : BuildType({
     name = "basic"
     description = "basic test"
 

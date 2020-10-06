@@ -48,7 +48,26 @@ Test Project for TemaCity
     * Open the project in TeamCity UI
     * Go to **Versioned Settings** to the tab **Change log**
     * Check for changes by click on **Check for changes** button
+    * Check configuration tab on the botton, **Current status** to see the update results.
 
 
 A TeamCity project is like a folder in Jenkins and it contains subprojects(Jenkins folders)
 and build configurations (Jobs). 
+
+# sequential Build configurations
+
+```
+project {
+    vcsRoot(BuildConfVcs)
+
+    // You have to define the build configurations
+    buildType(Basic)
+    buildType(BasicFromGit)
+
+    // You set the way to execute them
+    sequential {
+        buildType(Basic)
+        buildType(BasicFromGit)
+    }
+}
+```
