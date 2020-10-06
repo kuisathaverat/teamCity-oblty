@@ -67,7 +67,7 @@ object Basic : BuildType({
 })
 
 object BasicFromGit : BuildType({
-    name = "Build"
+    name = "BasicGit"
     artifactRules = "target/*jar"
 
     vcs {
