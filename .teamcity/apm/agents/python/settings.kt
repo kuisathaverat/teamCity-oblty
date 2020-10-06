@@ -27,7 +27,7 @@ class ApmAgentPythonProject: Project ({
     id("apm_agent_python_project")
     name = "APM Agent Python"
 
-    template(DefaultTemplate)
+    template(DefaultTemplate())
 
     vcsRoot(ApmAgentPythonVcs)
     buildType(ApmAgentPythonMain())

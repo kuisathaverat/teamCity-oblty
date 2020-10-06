@@ -25,7 +25,7 @@ class ApmAgentsProject: Project ({
     id("apm_agents_project")
     name = "APM Agents"
 
-    template(DefaultTemplate)
+    template(DefaultTemplate())
 
     subProject(ApmAgentPythonProject())
 })
