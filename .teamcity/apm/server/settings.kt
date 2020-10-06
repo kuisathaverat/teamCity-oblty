@@ -27,6 +27,7 @@ class ApmServerProject: Project ({
     name = "APM Server"
 
     vcsRoot(ApmServerVcs)
+    buildType(ApmServer())
 })
 
 class ApmServer() : BuildType ({
