@@ -46,11 +46,18 @@ version = "2020.1"
 
 project {
     vcsRoot(BuildConfVcs)
+    buildType(Basic)
+    buildType(BasicFromGit)
+
     sequential {
         buildType(Basic)
         buildType(BasicFromGit)
     }
 }
+
+object Basic : BuildType({
+
+})
 
 object Basic : BuildType({
     name = "basic"
