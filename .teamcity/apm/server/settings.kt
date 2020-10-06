@@ -42,7 +42,7 @@ class ApmServer() : BuildType ({
 
     steps {
         script {
-            scriptContent = """echo '${os} - ${version}'"""
+            scriptContent = """echo 'Hello'"""
         }
     }
 
