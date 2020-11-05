@@ -84,8 +84,8 @@ project {
             param("agent_pool_id", "-2")
             param("preemptible", "false")
             param("sourceProject", "elastic-images-prod")
-            param("sourceImageFamily", "elastic-kibana-ci-ubuntu-1804-lts")
-            param("source-id", "elastic-kibana-ci-ubuntu-1804-lts")
+            param("sourceImageFamily", "elastic-apm-ci-ubuntu-1804-lts")
+            param("source-id", "elastic-apm-ci-ubuntu-1804-lts")
             param("zone", "us-central1-a")
             param("profileId", "Observability")
             param("diskType", "pd-ssd")
@@ -93,6 +93,7 @@ project {
             param("maxInstances", "400")
             param("imageType", "ImageFamily")
             param("diskSizeGb", "100")
+            param("machineType", "n2-standard-4")
         }
     }
 }
