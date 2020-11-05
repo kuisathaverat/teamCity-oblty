@@ -84,6 +84,7 @@ project {
             param("preemptible", "false")
             param("sourceProject", "elastic-images-prod")
             param("sourceImageFamily", "elastic-apm-ci-ubuntu-1804-lts")
+            param("source-id", "elastic-apm-ci-ubuntu-1804-lts")
             param("zone", "us-central1-a")
             param("profileId", "Observability")
             param("diskType", "pd-ssd")
