@@ -72,7 +72,7 @@ project {
             param("terminate-after-build", "true")
             param("terminate-idle-time", "30")
             param("enabled", "true")
-            param("secure:accessKey", "credentialsJSON:1a9aa2b1-9c00-45b9-8f8e-a1bc8ea1ff19")
+            param("secure:accessKey", "redentialsJSON:27d49237-5a78-4989-80e9-b5b54ec5d8f7")
         }
 
         feature {
