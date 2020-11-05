@@ -84,7 +84,7 @@ project {
             param("agent_pool_id", "-2")
             param("preemptible", "false")
             param("sourceProject", "elastic-images-prod")
-            param("sourceImageFamily", "elastic-apm-ci-ubuntu-1804-lts")
+            param("sourceImageFamily", "elastic-kibana-ci-ubuntu-1804-lts")
             param("source-id", "elastic-apm-ci-ubuntu-1804-lts")
             param("zone", "us-central1-a")
             param("profileId", "Observability")
