@@ -92,7 +92,7 @@ project {
             param("machineCustom", "false")
             param("maxInstances", "400")
             param("imageType", "ImageFamily")
-            param("diskSizeGb", "100")
+            param("diskSizeGb", "150")
             param("machineType", "n2-standard-4")
         }
     }
