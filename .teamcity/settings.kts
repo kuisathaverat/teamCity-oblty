@@ -46,6 +46,10 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
     template(DefaultTemplate)
 
     subProject(ApmProject())

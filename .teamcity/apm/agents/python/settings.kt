@@ -27,6 +27,10 @@ class ApmAgentPythonProject: Project ({
     id("apm_agent_python_project")
     name = "APM Agent Python"
 
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
     defaultTemplate = DefaultTemplate
 
     vcsRoot(ApmAgentPythonVcs)

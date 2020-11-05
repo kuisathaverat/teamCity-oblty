@@ -24,6 +24,10 @@ class ApmServerProject: Project ({
     id("apm_server_project")
     name = "APM Server"
 
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
     defaultTemplate = DefaultTemplate
 
     vcsRoot(ApmServerVcs)

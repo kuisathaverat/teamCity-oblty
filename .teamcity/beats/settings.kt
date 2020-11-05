@@ -24,5 +24,10 @@ class BeatsProject: Project({
     id("beats_project")
     name = "Beats"
 
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
     defaultTemplate = DefaultTemplate
+
 })
