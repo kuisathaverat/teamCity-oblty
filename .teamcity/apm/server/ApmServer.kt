@@ -45,6 +45,6 @@ class ApmServer() : BuildType ({
     }
 
     requirements {
-        contains("teamcity.agent.name", "ubuntu-16")
+        contains("teamcity.agent.name", "apm-ci-ubuntu-18")
     }
 })

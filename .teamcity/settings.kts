@@ -55,4 +55,24 @@ project {
     subProject(ApmProject())
     subProject(BeatsProject())
     subProject(SharedProject())
+
+    features {
+        feature {
+            type = "CloudImage"
+            param("network", "teamcity")
+            param("subnet", "teamcity")
+            param("growingId", "true")
+            param("agent_pool_id", "-2")
+            param("preemptible", "false")
+            param("sourceProject", "elastic-images-prod")
+            param("sourceImageFamily", "elastic-apm-ci-ubuntu-1804-lts")
+            param("zone", "us-central1-a")
+            param("profileId", "kibana")
+            param("diskType", "pd-ssd")
+            param("machineCustom", "false")
+            param("maxInstances", "400")
+            param("imageType", "ImageFamily")
+            param("diskSizeGb", "100")
+        }
+    }
 }
