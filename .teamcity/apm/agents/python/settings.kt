@@ -36,7 +36,6 @@ class ApmAgentPythonProject: Project ({
     vcsRoot(ApmAgentPythonVcs)
 
     var bts = sequential {
-        buildType(ApmAgentPythonMain())
         parallel {
             operatingSystems.forEach() {os ->
                 pythonVersions.forEach(){ version ->
@@ -44,6 +43,7 @@ class ApmAgentPythonProject: Project ({
                 }
             }
         }
+        buildType(ApmAgentPythonMain())
     }.buildTypes()
 
     bts.forEach{ buildType(it) }

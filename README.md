@@ -238,3 +238,54 @@ class ApmServerProject: Project ({
     buildType(ApmServer())
 })
 ```
+
+Agents Pool
+
+```
+
+project {
+...
+
+    features {
+        feature {
+            id = "Observability"
+            type = "CloudProfile"
+            param("agentPushPreset", "")
+            param("profileId", "Observability")
+            param("profileServerUrl", "")
+            param("name", "Observability")
+            param("total-work-time", "")
+            param("credentialsType", "key")
+            param("description", "")
+            param("next-hour", "")
+            param("cloud-code", "google")
+            param("terminate-after-build", "true")
+            param("terminate-idle-time", "30")
+            param("enabled", "true")
+            param("secure:accessKey", "credentialsJSON:33f809b9-679b-4641-9874-dd3bc8f2098b")
+        }
+
+        feature {
+            id = "observability-ci-ubuntu-1804-lts"
+            type = "CloudImage"
+            param("network", "teamcity")
+            param("subnet", "teamcity")
+            param("growingId", "true")
+            param("agent_pool_id", "-2")
+            param("preemptible", "false")
+            param("sourceProject", "elastic-images-prod")
+            param("sourceImageFamily", "elastic-kibana-ci-ubuntu-1804-lts")
+            param("source-id", "elastic-apm-ci-ubuntu-1804-lts")
+            param("zone", "us-central1-a")
+            param("profileId", "Observability")
+            param("diskType", "pd-ssd")
+            param("machineCustom", "false")
+            param("maxInstances", "400")
+            param("imageType", "ImageFamily")
+            param("diskSizeGb", "150")
+            param("machineType", "n2-standard-4")
+        }
+    }
+}
+
+```
