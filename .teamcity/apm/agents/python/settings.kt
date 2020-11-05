@@ -30,14 +30,8 @@ class ApmAgentPythonProject: Project ({
     defaultTemplate = DefaultTemplate
 
     vcsRoot(ApmAgentPythonVcs)
-    buildType(ApmAgentPythonMain())
-    operatingSystems.forEach() {os ->
-        pythonVersions.forEach(){ version ->
-            buildType(ApmAgentPythonAxis(os, version))
-        }
-    }
 
-    sequential {
+    var bts = sequential {
         buildType(ApmAgentPythonMain())
         parallel {
             operatingSystems.forEach() {os ->
@@ -46,6 +40,8 @@ class ApmAgentPythonProject: Project ({
                 }
             }
         }
-    }
+    }.buildTypes()
+
+    bts.forEach{ buildType(it) }
 })
 
