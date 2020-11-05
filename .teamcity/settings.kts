@@ -58,6 +58,24 @@ project {
 
     features {
         feature {
+            id = "Observability"
+            type = "CloudProfile"
+            param("agentPushPreset", "")
+            param("profileId", "kibana")
+            param("profileServerUrl", "")
+            param("name", "kibana")
+            param("total-work-time", "")
+            param("credentialsType", "key")
+            param("description", "")
+            param("next-hour", "")
+            param("cloud-code", "google")
+            param("terminate-after-build", "true")
+            param("terminate-idle-time", "30")
+            param("enabled", "true")
+            param("secure:accessKey", "credentialsJSON:447fdd4d-7129-46b7-9822-2e57658c7422")
+        }
+
+        feature {
             type = "CloudImage"
             param("network", "teamcity")
             param("subnet", "teamcity")
@@ -67,7 +85,7 @@ project {
             param("sourceProject", "elastic-images-prod")
             param("sourceImageFamily", "elastic-apm-ci-ubuntu-1804-lts")
             param("zone", "us-central1-a")
-            param("profileId", "kibana")
+            param("profileId", "Observability")
             param("diskType", "pd-ssd")
             param("machineCustom", "false")
             param("maxInstances", "400")
