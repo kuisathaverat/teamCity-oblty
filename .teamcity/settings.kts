@@ -61,9 +61,9 @@ project {
             id = "Observability"
             type = "CloudProfile"
             param("agentPushPreset", "")
-            param("profileId", "kibana")
+            param("profileId", "Observability")
             param("profileServerUrl", "")
-            param("name", "kibana")
+            param("name", "Observability")
             param("total-work-time", "")
             param("credentialsType", "key")
             param("description", "")
