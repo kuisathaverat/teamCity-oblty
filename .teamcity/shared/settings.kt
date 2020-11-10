@@ -30,11 +30,11 @@ class SharedProject: Project({
     defaultTemplate = DefaultTemplate
 
     buildType(TestAgentMain())
-    SyncA
-    SyncB
-    SyncC
-    SyncD
-    SyncE
+    buildType(SyncA)
+    buildType(SyncB)
+    buildType(SyncC)
+    buildType(SyncD)
+    buildType(SyncE)
 
     subProject(P10())
     subProject(P20())
