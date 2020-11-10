@@ -74,7 +74,21 @@ open class SyncTasks(idName: String) : BuildType({
 })
 
 
-object SyncA: SyncTasks("A")
+//object SyncA: SyncTasks("A")
+object SyncA : BuildType({
+    id("sync_A".toId())
+    name = "Sync tasks A"
+    description = "BuildType to synchronize tasks"
+    artifactRules = "A.txt"
+
+    steps {
+        script {
+            name = "shell"
+            scriptContent = """touch A.txt"""
+        }
+    }
+})
+
 object SyncB: SyncTasks("B")
 object SyncC: SyncTasks("C")
 object SyncD: SyncTasks("D")

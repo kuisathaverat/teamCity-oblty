@@ -24,6 +24,8 @@ class TestAgent(val idArg: String) : BuildType({
     name = "Test Agent - ${idArg}"
     description = "Test Agent with 17MB of log"
 
+    artifactRules = "${idArg}.txt"
+
     steps {
         script {
             name = "shell"
