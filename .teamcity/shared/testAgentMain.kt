@@ -37,6 +37,10 @@ class TestAgentMain : BuildType({
 
     dependencies {
         snapshot(SyncA){}
+        snapshot(SyncB){}
+        snapshot(SyncC){}
+        snapshot(SyncD){}
+        snapshot(SyncE){}
         artifacts(SyncA) {
             artifactRules = "A.txt"
         }
