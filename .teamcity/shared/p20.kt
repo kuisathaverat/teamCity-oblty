@@ -18,10 +18,11 @@
 package shared
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
-class SharedProject: Project({
-    id("shared_project")
-    name = "Shared"
+class P20: Project({
+    id("p20")
+    name = "P20"
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
@@ -29,11 +30,15 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    buildType(TestAgent("Main"))
 
-    subProject(P10())
-    subProject(P20())
-    subProject(P30())
-    subProject(P40())
-    subProject(P50())
+    var bts = sequential {
+        parallel {
+            for (i in 1..20) {
+                buildType(TestAgent("B${i}"))
+            }
+        }
+        buildType(TestAgent("Main"))
+    }.buildTypes()
+
+    bts.forEach{ buildType(it) }
 })
