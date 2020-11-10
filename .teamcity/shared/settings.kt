@@ -17,11 +17,52 @@
 
 package shared
 
+import apm.agents.python.ApmAgentPythonAxis
+import apm.agents.python.ApmAgentPythonMain
+import apm.agents.python.operatingSystems
+import apm.agents.python.pythonVersions
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
 class SharedProject: Project({
     id("shared_project")
     name = "Shared"
 
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
     defaultTemplate = DefaultTemplate
+
+
+    var bts = sequential {
+        parallel {
+            for (i in 1..10) {
+                buildType(TestAgent("A${i}"))
+            }
+        }
+        parallel {
+            for (i in 1..20) {
+                buildType(TestAgent("B${i}"))
+            }
+        }
+        parallel {
+            for (i in 1..30) {
+                buildType(TestAgent("C${i}"))
+            }
+        }
+        parallel {
+            for (i in 1..40) {
+                buildType(TestAgent("D${i}"))
+            }
+        }
+        parallel {
+            for (i in 1..50) {
+                buildType(TestAgent("E${i}"))
+            }
+        }
+        buildType(TestAgent("Main"))
+    }.buildTypes()
+
+    bts.forEach{ buildType(it) }
 })
