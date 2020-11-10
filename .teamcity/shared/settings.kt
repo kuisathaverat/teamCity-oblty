@@ -29,7 +29,7 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    buildType(TestAgent("Main"))
+    buildType(TestAgentMain())
 
     subProject(P10())
     subProject(P20())

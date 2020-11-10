@@ -19,9 +19,9 @@ package shared
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-class TestAgent(val idArg: String) : BuildType({
-    id("test_agent_${idArg}".toId())
-    name = "Test Agent - ${idArg}"
+class TestAgentMain : BuildType({
+    id("test_agent_main".toId())
+    name = "Test Agent - Main"
     description = "Test Agent with 17MB of log"
 
     steps {
@@ -34,4 +34,44 @@ class TestAgent(val idArg: String) : BuildType({
     requirements {
         contains("teamcity.agent.name", "apm-ci-ubuntu-18")
     }
+
+    dependencies {
+        snapshot(SyncA){}
+        artifacts(SyncA) {
+            artifactRules = "A.txt"
+        }
+        artifacts(SyncB) {
+            artifactRules = "B.txt"
+        }
+        artifacts(SyncC) {
+            artifactRules = "C.txt"
+        }
+        artifacts(SyncD) {
+            artifactRules = "D.txt"
+        }
+        artifacts(SyncE) {
+            artifactRules = "E.txt"
+        }
+    }
 })
+
+open class SyncTasks(idName: String) : BuildType({
+    id("sync_${idName}".toId())
+    name = "Sync tasks ${idName}"
+    description = "BuildType to synchronize tasks"
+    artifactRules = "${idName}.txt"
+
+    steps {
+        script {
+            name = "shell"
+            scriptContent = """touch ${idName}.txt"""
+        }
+    }
+})
+
+
+object SyncA: SyncTasks("A")
+object SyncB: SyncTasks("B")
+object SyncC: SyncTasks("C")
+object SyncD: SyncTasks("D")
+object SyncE: SyncTasks("E")
