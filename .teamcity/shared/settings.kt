@@ -17,10 +17,6 @@
 
 package shared
 
-import apm.agents.python.ApmAgentPythonAxis
-import apm.agents.python.ApmAgentPythonMain
-import apm.agents.python.operatingSystems
-import apm.agents.python.pythonVersions
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
