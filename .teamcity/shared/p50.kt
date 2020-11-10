@@ -32,13 +32,13 @@ class P50: Project({
 
 
     var bts = sequential {
-        buildType(SyncD)
+        SyncD
         parallel {
             for (i in 1..50) {
                 buildType(TestAgent("E${i}"))
             }
         }
-        buildType(SyncE)
+        SyncE
     }.buildTypes()
 
     bts.forEach{ buildType(it) }

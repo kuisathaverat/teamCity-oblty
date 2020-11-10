@@ -37,7 +37,7 @@ class P10: Project({
                 buildType(TestAgent("A${i}"))
             }
         }
-        buildType(SyncA)
+        SyncA
     }.buildTypes()
 
     bts.forEach{ buildType(it) }
