@@ -40,5 +40,6 @@ class P10: Project({
         SyncA
     }.buildTypes()
 
+    SyncA
     bts.forEach{ buildType(it) }
 })
