@@ -17,6 +17,7 @@
 
 package shared
 
+import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
@@ -56,8 +57,12 @@ class ParallelEmAll: Project({
                 buildType(TestAgent("P50${i}"))
             }
         }
-        buildType(TestAgent("P150"))
+        buildType(TestAgentCron())
     }.buildTypes()
 
     bts.forEach{ buildType(it) }
 })
+
+class TestAgentCron(): BuildType {
+
+}

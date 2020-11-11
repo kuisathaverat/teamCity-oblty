@@ -18,7 +18,6 @@
 package shared
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
-import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
 class P30: Project({
     id("p30")
@@ -30,15 +29,6 @@ class P30: Project({
 
     defaultTemplate = DefaultTemplate
 
-
-    var bts = sequential {
-        parallel {
-            for (i in 1..30) {
-                buildType(TestAgent("C${i}"))
-            }
-        }
-        buildType(TestAgent("SyncC"))
-    }.buildTypes()
-
-    bts.forEach{ buildType(it) }
+    p30.forEach{ buildType(it) }
+    buildType(syncC)
 })

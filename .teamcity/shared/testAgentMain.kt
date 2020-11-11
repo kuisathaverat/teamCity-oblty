@@ -16,8 +16,10 @@
 // under the License.
 package shared
 
+import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.schedule
 
 class TestAgentMain : BuildType({
     id("test_agent_main".toId())
@@ -33,5 +35,21 @@ class TestAgentMain : BuildType({
 
     requirements {
         contains("teamcity.agent.name", "apm-ci-ubuntu-18")
+    }
+
+    dependsOn(syncA, syncB, syncC, syncD, syncE){
+        onDependencyFailure = FailureAction.ADD_PROBLEM
+        onDependencyCancel = FailureAction.ADD_PROBLEM
+    }
+
+    triggers {
+        schedule {
+            schedulingPolicy = cron {
+                minutes = "30"
+            }
+            branchFilter = ""
+            triggerBuild = always()
+            withPendingChangesOnly = false
+        }
     }
 })

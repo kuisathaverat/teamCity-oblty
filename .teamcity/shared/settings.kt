@@ -17,8 +17,35 @@
 
 package shared
 
+import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
-import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
+
+val p10 = listOf(1..10).map {
+    TestAgent("A${it}")
+}
+
+val p20 = listOf(1..20).map {
+    TestAgent("B${it}")
+}
+
+val p30 = listOf(1..30).map {
+    TestAgent("C${it}")
+}
+
+val p40 = listOf(1..40).map {
+    TestAgent("D${it}")
+}
+
+val p50 = listOf(1..50).map {
+    TestAgent("E${it}")
+}
+
+val syncA = TestAgent("SyncA")
+val syncB = TestAgent("SyncB")
+val syncC = TestAgent("SyncC")
+val syncD = TestAgent("SyncD")
+val syncE = TestAgent("SyncE")
+val main = TestAgentMain()
 
 class SharedProject: Project({
     id("shared_project")
@@ -30,16 +57,12 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    var bts = sequential {
-        buildType(TestAgent("SyncA"))
-        buildType(TestAgent("SyncB"))
-        buildType(TestAgent("SyncC"))
-        buildType(TestAgent("SyncD"))
-        buildType(TestAgent("SyncE"))
-        buildType(TestAgentMain())
-    }.buildTypes()
+    buildType(main)
 
-    buildType(TestAgentMain())
+    syncB.dependsOn(syncA)
+    syncC.dependsOn(syncB)
+    syncD.dependsOn(syncC)
+    syncE.dependsOn(syncD)
 
     subProject(P10())
     subProject(P20())
