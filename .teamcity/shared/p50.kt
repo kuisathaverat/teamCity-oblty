@@ -40,5 +40,5 @@ class P50: Project({
         buildType(TestAgent("SyncE"))
     }.buildTypes()
 
-    bts.filter { !it.name.contains("Sync")  }.forEach{ buildType(it) }
+    bts.forEach{ buildType(it) }
 })
