@@ -57,6 +57,8 @@ and build configurations (Jobs).
 
 # Sequential Build configurations
 
+**Warning use only for simple configurations for all the rest use snapshot dependencies**
+
 ```
 project {
     vcsRoot(BuildConfVcs)
@@ -74,6 +76,9 @@ project {
 ```
 
 # Parallel Build configurations
+
+**Warning use only for simple configurations for all the rest use snapshot dependencies**
+
 
 ```
 project {
@@ -95,6 +100,8 @@ project {
 ```
 
 # Dynamic Parallel Build configurations
+
+**Warning use only for simple configurations for all the rest use snapshot dependencies**
 
 ```
 val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
@@ -289,3 +296,55 @@ project {
 }
 
 ```
+
+# Snapshot dependencies using extensions functions
+
+```
+val syncA = TestAgent("SyncA")
+val syncB = TestAgent("SyncB")
+
+class SharedProject: Project({
+    id("shared_project")
+    name = "Shared"
+
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
+    defaultTemplate = DefaultTemplate
+
+    buildType(syncA)
+    buildType(syncB)
+    buildType(syncF)
+
+    // add a dependency calling the dependsOn function
+    syncB.dependsOn(syncA)
+})
+
+object syncF: BuildType({
+    id("syncf".toId())
+    name = "syncF"
+
+    // add a dependency calling the dependsOn extension function
+    dependsOn(syncA){
+        onDependencyFailure = FailureAction.ADD_PROBLEM
+        onDependencyCancel = FailureAction.ADD_PROBLEM
+    }
+})
+
+fun BuildType.dependsOn(buildType: BuildType) {
+    dependsOn(buildType) {}
+}
+
+fun BuildType.dependsOn(buildType: BuildType, init: SnapshotDependency.() -> Unit) {
+    dependencies {
+        snapshot(buildType) {
+            reuseBuilds = ReuseBuilds.SUCCESSFUL
+            onDependencyCancel = FailureAction.CANCEL
+            onDependencyFailure = FailureAction.CANCEL
+            synchronizeRevisions = true
+            init()
+        }
+    }
+}
+``` 
