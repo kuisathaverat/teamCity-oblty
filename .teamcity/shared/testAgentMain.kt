@@ -37,7 +37,7 @@ class TestAgentMain : BuildType({
         contains("teamcity.agent.name", "apm-ci-ubuntu-18")
     }
 
-    dependsOn(syncA, syncB, syncC, syncD, syncE){
+    dependsOn(syncE){
         onDependencyFailure = FailureAction.ADD_PROBLEM
         onDependencyCancel = FailureAction.ADD_PROBLEM
     }
