@@ -43,7 +43,7 @@ class SharedProject: Project({
         buildType(TestAgentMain())
     }.buildTypes()
 
-    bts.filter{ !it.name.contains("Sync")  }.forEach{ buildType(it) }
+    buildType(TestAgentMain())
 
     subProject(P10())
     subProject(P20())
