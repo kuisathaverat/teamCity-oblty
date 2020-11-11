@@ -30,7 +30,6 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    /*
     var bts = sequential {
         buildType(TestAgent("SyncA"))
         buildType(TestAgent("SyncB"))
@@ -39,32 +38,6 @@ class SharedProject: Project({
         buildType(TestAgent("SyncE"))
         buildType(TestAgentMain())
     }.buildTypes()
-    */
-
-    sequential {
-        buildType(TestAgent("SyncA"))
-        buildType(TestAgentMain())
-    }
-
-    sequential {
-        buildType(TestAgent("SyncB"))
-        buildType(TestAgentMain())
-    }
-
-    sequential {
-        buildType(TestAgent("SyncC"))
-        buildType(TestAgentMain())
-    }
-
-    sequential {
-        buildType(TestAgent("SyncD"))
-        buildType(TestAgentMain())
-    }
-
-    sequential {
-        buildType(TestAgent("SyncE"))
-        buildType(TestAgentMain())
-    }
 
     buildType(TestAgentMain())
 
