@@ -24,7 +24,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.schedule
 fun BuildType.dependsOn(buildType: BuildType, init: SnapshotDependency.() -> Unit) {
     dependencies {
         snapshot(buildType) {
-            reuseBuilds = ReuseBuilds.SUCCESSFUL
+            reuseBuilds = ReuseBuilds.NO
             onDependencyCancel = FailureAction.CANCEL
             onDependencyFailure = FailureAction.CANCEL
             synchronizeRevisions = true
