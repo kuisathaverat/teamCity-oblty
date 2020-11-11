@@ -32,9 +32,13 @@ class SharedProject: Project({
 
     var bts = sequential {
         buildType(TestAgent("SyncA"))
+        buildType(TestAgentMain())
         buildType(TestAgent("SyncB"))
+        buildType(TestAgentMain())
         buildType(TestAgent("SyncC"))
+        buildType(TestAgentMain())
         buildType(TestAgent("SyncD"))
+        buildType(TestAgentMain())
         buildType(TestAgent("SyncE"))
         buildType(TestAgentMain())
     }.buildTypes()
