@@ -72,7 +72,6 @@ class SharedProject: Project({
     subProject(P30())
     subProject(P40())
     subProject(P50())
-    subProject(ParallelEmAll())
 })
 
 object syncF: BuildType({
