@@ -37,8 +37,8 @@ class SharedProject: Project({
             buildType(TestAgent("SyncC"))
             buildType(TestAgent("SyncD"))
             buildType(TestAgent("SyncE"))
+            buildType(TestAgentMain())
         }
-        buildType(TestAgentMain())
     }.buildTypes()
 
     buildType(TestAgentMain())
