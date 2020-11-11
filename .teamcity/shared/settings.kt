@@ -30,16 +30,41 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
+    /*
     var bts = sequential {
-        parallel {
-            buildType(TestAgent("SyncA"))
-            buildType(TestAgent("SyncB"))
-            buildType(TestAgent("SyncC"))
-            buildType(TestAgent("SyncD"))
-            buildType(TestAgent("SyncE"))
-        }
+        buildType(TestAgent("SyncA"))
+        buildType(TestAgent("SyncB"))
+        buildType(TestAgent("SyncC"))
+        buildType(TestAgent("SyncD"))
+        buildType(TestAgent("SyncE"))
         buildType(TestAgentMain())
     }.buildTypes()
+    */
+
+    sequential {
+        buildType(TestAgent("SyncA"))
+        buildType(TestAgentMain())
+    }
+
+    sequential {
+        buildType(TestAgent("SyncB"))
+        buildType(TestAgentMain())
+    }
+
+    sequential {
+        buildType(TestAgent("SyncC"))
+        buildType(TestAgentMain())
+    }
+
+    sequential {
+        buildType(TestAgent("SyncD"))
+        buildType(TestAgentMain())
+    }
+
+    sequential {
+        buildType(TestAgent("SyncE"))
+        buildType(TestAgentMain())
+    }
 
     buildType(TestAgentMain())
 
