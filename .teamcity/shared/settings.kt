@@ -31,14 +31,14 @@ class SharedProject: Project({
     defaultTemplate = DefaultTemplate
 
     var bts = sequential {
-        sequential {
+        parallel {
             buildType(TestAgent("SyncA"))
             buildType(TestAgent("SyncB"))
             buildType(TestAgent("SyncC"))
             buildType(TestAgent("SyncD"))
             buildType(TestAgent("SyncE"))
-            buildType(TestAgentMain())
         }
+        buildType(TestAgentMain())
     }.buildTypes()
 
     buildType(TestAgentMain())
