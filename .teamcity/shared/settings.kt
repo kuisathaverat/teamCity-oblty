@@ -18,7 +18,10 @@
 package shared
 
 import dependsOn
+import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2019_2.FailureAction
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 
 val p10 = listOf(1..10).map {
     TestAgent("A${it}")
@@ -70,4 +73,14 @@ class SharedProject: Project({
     subProject(P40())
     subProject(P50())
     subProject(ParallelEmAll())
+})
+
+object syncF: BuildType({
+    id("syncf".toId())
+    name = "syncF"
+
+    dependsOn(syncA){
+        onDependencyFailure = FailureAction.ADD_PROBLEM
+        onDependencyCancel = FailureAction.ADD_PROBLEM
+    }
 })
