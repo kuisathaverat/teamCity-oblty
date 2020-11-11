@@ -28,6 +28,7 @@ fun BuildType.dependsOn(buildType: BuildType, init: SnapshotDependency.() -> Uni
             onDependencyCancel = FailureAction.CANCEL
             onDependencyFailure = FailureAction.CANCEL
             synchronizeRevisions = true
+            runOnSameAgent = false
             init()
         }
     }
