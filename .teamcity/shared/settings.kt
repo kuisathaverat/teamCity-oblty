@@ -18,6 +18,7 @@
 package shared
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.sequential
 
 class SharedProject: Project({
     id("shared_project")
@@ -30,11 +31,20 @@ class SharedProject: Project({
     defaultTemplate = DefaultTemplate
 
     buildType(TestAgentMain())
-    buildType(SyncA)
-    buildType(SyncB)
-    buildType(SyncC)
-    buildType(SyncD)
-    buildType(SyncE)
+    buildType(TestAgent("SyncA"))
+    buildType(TestAgent("SyncB"))
+    buildType(TestAgent("SyncC"))
+    buildType(TestAgent("SyncD"))
+    buildType(TestAgent("SyncE"))
+
+    sequential {
+        buildType(TestAgent("SyncA"))
+        buildType(TestAgent("SyncB"))
+        buildType(TestAgent("SyncC"))
+        buildType(TestAgent("SyncD"))
+        buildType(TestAgent("SyncE"))
+        buildType(TestAgentMain())
+    }
 
     subProject(P10())
     subProject(P20())

@@ -32,14 +32,13 @@ class P40: Project({
 
 
     var bts = sequential {
-        SyncC
         parallel {
             for (i in 1..40) {
                 buildType(TestAgent("D${i}"))
             }
         }
-        SyncD
+        buildType(TestAgent("SyncD"))
     }.buildTypes()
 
-    bts.forEach{ buildType(it) }
+    bts.filter { !it.name.contains("Sync")  }.forEach{ buildType(it) }
 })
