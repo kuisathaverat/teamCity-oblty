@@ -30,21 +30,16 @@ class SharedProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    buildType(TestAgentMain())
-    buildType(TestAgent("SyncA"))
-    buildType(TestAgent("SyncB"))
-    buildType(TestAgent("SyncC"))
-    buildType(TestAgent("SyncD"))
-    buildType(TestAgent("SyncE"))
-
-    sequential {
+    var bts = sequential {
         buildType(TestAgent("SyncA"))
         buildType(TestAgent("SyncB"))
         buildType(TestAgent("SyncC"))
         buildType(TestAgent("SyncD"))
         buildType(TestAgent("SyncE"))
         buildType(TestAgentMain())
-    }
+    }.buildTypes()
+
+    bts.forEach{ buildType(it) }
 
     subProject(P10())
     subProject(P20())
