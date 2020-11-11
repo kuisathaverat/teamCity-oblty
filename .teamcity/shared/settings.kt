@@ -18,10 +18,7 @@
 package shared
 
 import dependsOn
-import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2019_2.FailureAction
-import jetbrains.buildServer.configs.kotlin.v2019_2.Project
-import jetbrains.buildServer.configs.kotlin.v2019_2.toId
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
 
 val p10 = (1..10).map {
     TestAgent("A${it}")
@@ -87,5 +84,6 @@ object syncF: BuildType({
     dependsOn(syncA){
         onDependencyFailure = FailureAction.ADD_PROBLEM
         onDependencyCancel = FailureAction.ADD_PROBLEM
+        reuseBuilds = ReuseBuilds.NO
     }
 })
