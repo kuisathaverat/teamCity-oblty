@@ -23,23 +23,23 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.FailureAction
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 
-val p10 = listOf(1..10).map {
+val p10 = (1..10).map {
     TestAgent("A${it}")
 }
 
-val p20 = listOf(1..20).map {
+val p20 = (1..20).map {
     TestAgent("B${it}")
 }
 
-val p30 = listOf(1..30).map {
+val p30 = (1..30).map {
     TestAgent("C${it}")
 }
 
-val p40 = listOf(1..40).map {
+val p40 = (1..40).map {
     TestAgent("D${it}")
 }
 
-val p50 = listOf(1..50).map {
+val p50 = (1..50).map {
     TestAgent("E${it}")
 }
 
@@ -61,6 +61,12 @@ class SharedProject: Project({
     defaultTemplate = DefaultTemplate
 
     buildType(main)
+
+    p10.forEach { syncA.dependsOn(it) }
+    p20.forEach { syncB.dependsOn(it) }
+    p30.forEach { syncC.dependsOn(it) }
+    p40.forEach { syncD.dependsOn(it) }
+    p50.forEach { syncE.dependsOn(it) }
 
     syncB.dependsOn(syncA)
     syncC.dependsOn(syncB)
