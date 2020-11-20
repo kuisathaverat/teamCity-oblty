@@ -24,12 +24,12 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.schedule
 class TestAgentMain : BuildType({
     id("test_agent_main".toId())
     name = "Test Agent - Main"
-    description = "Test Agent with 17MB of log"
+    description = "Test Agent with 200KB of log"
 
     steps {
         script {
             name = "shell"
-            scriptContent = """dd if=/dev/urandom bs=1k count=17000 |base64"""
+            scriptContent = """dd if=/dev/urandom bs=1k count=100 |base64"""
         }
     }
 

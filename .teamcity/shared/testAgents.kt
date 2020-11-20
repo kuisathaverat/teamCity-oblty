@@ -22,7 +22,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 class TestAgent(val idArg: String) : BuildType({
     id("test_agent_${idArg}".toId())
     name = "Test Agent - ${idArg}"
-    description = "Test Agent with 2MB of log"
+    description = "Test Agent with 20KB of log"
 
     steps {
         script {
