@@ -22,12 +22,12 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 class TestAgent(val idArg: String) : BuildType({
     id("test_agent_${idArg}".toId())
     name = "Test Agent - ${idArg}"
-    description = "Test Agent with 17MB of log"
+    description = "Test Agent with 2MB of log"
 
     steps {
         script {
             name = "shell"
-            scriptContent = """dd if=/dev/urandom bs=1k count=17000 |base64"""
+            scriptContent = """dd if=/dev/urandom bs=1k count=1000 |base64"""
         }
     }
 
