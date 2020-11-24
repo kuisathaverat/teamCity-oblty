@@ -99,5 +99,7 @@ project {
 
     cleanup {
         all(builds=10)
+        history(builds=10)
+        artifacts(builds=10)
     }
 }
