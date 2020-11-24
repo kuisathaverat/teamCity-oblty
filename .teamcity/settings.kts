@@ -96,4 +96,8 @@ project {
             param("machineType", "n2-standard-4")
         }
     }
+
+    cleanup {
+        all(builds=10)
+    }
 }
