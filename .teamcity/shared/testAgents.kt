@@ -27,7 +27,7 @@ class TestAgent(val idArg: String) : BuildType({
     steps {
         script {
             name = "shell"
-            scriptContent = """dd if=/dev/urandom bs=1k count=200 |base64"""
+            scriptContent = """dd if=/dev/urandom bs=1k count=200 |base64; sleep 30"""
         }
     }
 
