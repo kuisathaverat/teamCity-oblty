@@ -45,7 +45,7 @@ class TestAgentMain : BuildType({
     triggers {
         schedule {
             schedulingPolicy = cron {
-                minutes = "*/10"
+                minutes = "*/5"
             }
             branchFilter = ""
             triggerBuild = always()
