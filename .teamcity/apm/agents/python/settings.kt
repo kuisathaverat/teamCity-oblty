@@ -124,11 +124,9 @@ class ApmAgentPythonProject: Project ({
     buildType(pythonMain)
     pythonVersions.forEach{ python ->
         operatingSystems.forEach{ os ->
-            frameworks.forEach{ framework ->
-                val bt = ApmAgentPythonAxis(os, python, framework)
-                buildType(bt)
-                pythonMain.dependsOn(bt)
-            }
+            val bt = ApmAgentPythonAxis(os, python)
+            buildType(bt)
+            pythonMain.dependsOn(bt)
         }
     }
 })
