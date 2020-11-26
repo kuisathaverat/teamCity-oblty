@@ -17,7 +17,6 @@
 
 package beats
 
-import apm.agents.python.operatingSystems
 import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
@@ -57,9 +56,6 @@ val beatOthers =  listOf(
         "dev-tools"
         )
 val beatsMain = BeatsMain()
-val beatsBuildTypes: List<TestAgent> = beat.zip(operatingSystems).map {
-    TestAgent("${it.first}_${it.second}".toId())
-}
 
 class BeatsProject: Project({
     id("beats_project")
@@ -72,9 +68,12 @@ class BeatsProject: Project({
     defaultTemplate = DefaultTemplate
 
     buildType(beatsMain)
-    beatsBuildTypes.forEach{
-        buildType(it)
-        beatsMain.dependsOn(it)
+    beat.forEach{ beat ->
+        operatingSystems.forEach{ os ->
+            val bt = TestAgent("${beat}_${os}".toId())
+            buildType(bt)
+            beatsMain.dependsOn(bt)
+        }
     }
     beatOthers.forEach{
         val bt = TestAgent(it)
