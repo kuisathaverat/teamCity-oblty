@@ -121,6 +121,7 @@ class ApmAgentPythonProject: Project ({
 
     vcsRoot(ApmAgentPythonVcs)
 
+    buildType(pythonMain)
     pythonVersions.forEach{ python ->
         operatingSystems.forEach{ os ->
             frameworks.forEach{ framework ->
