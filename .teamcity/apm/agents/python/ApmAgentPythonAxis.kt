@@ -23,9 +23,9 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
-class ApmAgentPythonAxis(val os: String, val version: String) : BuildType({
-    id("APM_agent_Python_${os}_${version}".toId())
-    name = "Agent Python ${os} ${version}"
+class ApmAgentPythonAxis(val os: String, val python: String, val framework: String) : BuildType({
+    id("APM_agent_Python_${os}_${python}_${framework}".toId())
+    name = "Agent Python ${os} ${python} ${framework}"
 
     vcs {
         root(ApmAgentPythonVcs)
@@ -36,7 +36,7 @@ class ApmAgentPythonAxis(val os: String, val version: String) : BuildType({
 
     steps {
         script {
-            scriptContent = """echo '${os} - ${version}'"""
+            scriptContent = """echo '${os} - ${python} - ${framework}'"""
         }
     }
 
