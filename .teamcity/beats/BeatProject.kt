@@ -30,7 +30,7 @@ class BeatProject(var beat: String): Project({
     }
 
     operatingSystems.forEach{ os ->
-        val bt = TestAgent("${beat}_${os}".toId())
+        val bt = BeatsBuild("${beat}", "${os}")
         buildType(bt)
         beatsMain.dependsOn(bt)
     }

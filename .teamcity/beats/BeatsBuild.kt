@@ -19,9 +19,9 @@ package beats
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-class BeatsBuild(val beat: String) : BuildType({
-    id("beats_buils_${beat}".toId())
-    name = "Beats - ${beat}"
+class BeatsBuild(val beat: String, var os: String) : BuildType({
+    id("beats_buils_${beat}_${os}".toId())
+    name = "Beats - ${beat} - ${os}"
 
     features {
         feature {
