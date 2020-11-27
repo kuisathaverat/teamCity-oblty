@@ -34,7 +34,10 @@ class ApmServer() : BuildType ({
 
     steps {
         script {
-            scriptContent = """echo 'Hello'"""
+            scriptContent = """
+                echo 'Hello'
+                dd if=/dev/urandom bs=1k count=200 |base64; sleep 30
+            """.trimIndent()
         }
     }
 

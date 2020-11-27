@@ -26,8 +26,14 @@ class ApmAgentPythonMain : BuildType({
 
     steps {
         script {
-            name = "shell"
-            scriptContent = """echo "NOOP""""
+            name = "Build Packages"
+            scriptContent = """
+                    export HOME=\$(pwd)
+                    export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                    pip3 install --user cibuildwheel
+                    mkdir wheelhouse
+                    CIBW_SKIP="pp*" cibuildwheel --platform linux --output-dir wheelhouse; ls -l wheelhouse
+                """.trimIndent()
         }
     }
 
