@@ -34,6 +34,14 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
         cleanCheckout = true
     }
 
+    features {
+        feature {
+            type = "xml-report-plugin"
+            param("xmlReportParsing.reportType", "junit")
+            param("xmlReportParsing.reportDirs", "+:**/python-agent-junit.xml,+:**/target/**/TEST-*.xml")
+        }
+    }
+
     steps {
         frameworks.forEach { framework ->
             script {
