@@ -68,7 +68,7 @@ class BeatsProject: Project({
         subProject(BeatProject(beat))
     }
     beatOthers.forEach{
-        val bt = BeatsBuild(it)
+        val bt = BeatsBuild(it, "ubuntu-18")
         buildType(bt)
         beatsMain.dependsOn(bt)
     }
