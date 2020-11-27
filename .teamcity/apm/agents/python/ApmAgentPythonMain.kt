@@ -32,7 +32,7 @@ class ApmAgentPythonMain : BuildType({
         script {
             name = "Build Packages"
             scriptContent = """
-                    echo '${'$'}'{TEST}
+                    echo ${'$'}{TEST}
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                     alias python=python3

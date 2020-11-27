@@ -20,12 +20,17 @@ package apm.agents.python
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
+import jetbrains.buildServer.configs.kotlin.v2019_2.ParameterDisplay
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
     id("APM_agent_Python_${os}_${python}".toId())
     name = "Agent Python ${os} ${python}"
+
+    params {
+        password("env.TEST", "SuPeRSeCrEt", display = ParameterDisplay.HIDDEN)
+    }
 
     vcs {
         root(ApmAgentPythonVcs)
@@ -46,6 +51,7 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
         script {
             name = "Lint"
             scriptContent = """
+                    echo ${'$'}{TEST}
                     echo '${os} - ${python}'
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
