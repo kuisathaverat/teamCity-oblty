@@ -24,10 +24,15 @@ class ApmAgentPythonMain : BuildType({
     name = "APM Agent Python"
     description = "Run all Build configurations"
 
+    params {
+        password("env.TEST", "SuPeRSeCrEt", display = ParameterDisplay.HIDDEN)
+    }
+
     steps {
         script {
             name = "Build Packages"
             scriptContent = """
+                    echo '${'$'}'{TEST}
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                     alias python=python3
