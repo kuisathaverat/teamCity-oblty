@@ -28,7 +28,7 @@ class ApmAgentPythonMain : BuildType({
         script {
             name = "Build Packages"
             scriptContent = """
-                    export HOME=\$(pwd)
+                    export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                     pip3 install --user cibuildwheel
                     mkdir wheelhouse
