@@ -18,11 +18,7 @@
 package beats
 
 import dependsOn
-import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2019_2.toId
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import shared.*
 
 val operatingSystems = listOf(
@@ -69,17 +65,14 @@ class BeatsProject: Project({
 
     buildType(beatsMain)
     beat.forEach{ beat ->
-        operatingSystems.forEach{ os ->
-            val bt = TestAgent("${beat}_${os}".toId())
-            buildType(bt)
-            beatsMain.dependsOn(bt)
-        }
+        subProject(BeatProject(beat))
     }
     beatOthers.forEach{
-        val bt = TestAgent(it)
+        val bt = BeatsBuild(it)
         buildType(bt)
         beatsMain.dependsOn(bt)
     }
 
     vcsRoot(BeatsVcs)
 })
+

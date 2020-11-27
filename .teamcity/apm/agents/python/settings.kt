@@ -272,19 +272,3 @@ class ApmAgentPythonProject: Project ({
     }
 })
 
-class ApmAgentPythonVersionProject(var version: String): Project ({
-    id("apm_agent_python_${version}_project".toId())
-    name = "APM Agent Python (${version})"
-
-    params {
-        param("teamcity.ui.settings.readOnly", "true")
-    }
-
-    defaultTemplate = DefaultTemplate
-
-    operatingSystems.forEach{ os ->
-        val bt = ApmAgentPythonAxis(os, version)
-        buildType(bt)
-        pythonMain.dependsOn(bt)
-    }
-})
