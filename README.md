@@ -348,3 +348,45 @@ fun BuildType.dependsOn(buildType: BuildType, init: SnapshotDependency.() -> Uni
     }
 }
 ``` 
+
+# Mask secrets
+
+```
+class ApmServer() : BuildType ({
+
+...
+
+    params {
+        password("env.TEST", "SuPeRSeCrEt", display = ParameterDisplay.HIDDEN)
+    }
+
+   steps {
+        script {
+            name = "Lint"
+            scriptContent = """
+                    echo ${'$'}{TEST}
+                """.trimIndent()
+        }
+    }
+...
+}
+```
+
+# JUnit reporting
+
+see https://www.jetbrains.com/help/teamcity/xml-report-processing.html
+
+```
+class ApmServer() : BuildType ({
+
+...
+    features {
+        feature {
+            type = "xml-report-plugin"
+            param("xmlReportParsing.reportType", "junit")
+            param("xmlReportParsing.reportDirs", "+:**/report-junit.xml,+:**/target/**/TEST-*.xml,-:**/NoWantedFiles.xml")
+        }
+    }
+...
+}
+```
