@@ -49,6 +49,7 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
                 mkdir -p ${'$'}{BIN}
                 curl -sL -o ${'$'}{BIN}/gvm https://github.com/andrewkroh/gvm/releases/download/v0.2.0/gvm-linux-amd64
                 chmod +x ${'$'}{BIN}/gvm
+                ls -la
             """.trimIndent()
         }
         script {
