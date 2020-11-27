@@ -49,7 +49,8 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
-                eval "${'$'}(gvm cat .go-version)"
+                GO_VERSION=${'$'}(cat .go-version)
+                eval "${'$'}(gvm ${'$'}GO_VERSION)"
                 go version
                 make mage
             """.trimIndent()
@@ -60,7 +61,8 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
-                eval "${'$'}(gvm cat .go-version)"
+                GO_VERSION=$(cat .go-version)
+                eval "$(gvm ${'$'}GO_VERSION)"
                 go version
                 cd ${beat}
                 make -C auditbeat check
@@ -74,7 +76,8 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
-                eval "${'$'}(gvm cat .go-version)"
+                GO_VERSION=${'$'}(cat .go-version)
+                eval "${'$'}(gvm ${'$'}GO_VERSION)"
                 go version
                 cd ${beat}
                 mage build test
