@@ -50,6 +50,8 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
                     echo '${os} - ${python} - ${framework}'
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                    alias python=python3
+                    alias pip=pip3
                     curl -s https://pre-commit.com/install-local.py | python -
                     pre-commit install --install-hooks
                     pre-commit run
@@ -62,6 +64,8 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                     export BUILD_NUMBER=1
+                    alias python=python3
+                    alias pip=pip3
                     ./tests/scripts/docker/run_tests.sh  ${python} ${framework}
                 """.trimIndent()
             }

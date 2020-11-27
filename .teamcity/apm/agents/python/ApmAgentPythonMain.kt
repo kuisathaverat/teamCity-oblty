@@ -30,6 +30,8 @@ class ApmAgentPythonMain : BuildType({
             scriptContent = """
                     export HOME=$(pwd)
                     export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                    alias python=python3
+                    alias pip=pip3
                     pip3 install --user cibuildwheel
                     mkdir wheelhouse
                     CIBW_SKIP="pp*" cibuildwheel --platform linux --output-dir wheelhouse; ls -l wheelhouse
