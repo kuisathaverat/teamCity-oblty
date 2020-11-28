@@ -58,7 +58,7 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
             scriptContent = """
                 set -e
                 export HOME=${'$'}(pwd)
-                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/build/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
@@ -72,7 +72,7 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
             scriptContent = """
                 set -e
                 export HOME=${'$'}(pwd)
-                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/build/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=$(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
@@ -88,7 +88,7 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
             scriptContent = """
                 set -e
                 export HOME=${'$'}(pwd)
-                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
+                export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/build/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
