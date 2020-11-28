@@ -43,6 +43,7 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
         script {
             name = "Install gvm"
             scriptContent = """
+                set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
@@ -55,11 +56,13 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
         script {
             name = "Install Go"
             scriptContent = """
+                set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
+                GOPATH=${'$'}GOROOT
                 go version
                 make mage
             """.trimIndent()
@@ -67,29 +70,31 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
         script {
             name = "Lint"
             scriptContent = """
+                set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=$(cat .go-version)
-                eval "$(gvm ${'$'}GO_VERSION)"
+                eval "${'$'}(gvm ${'$'}GO_VERSION)"
+                GOPATH=${'$'}GOROOT
                 go version
-                cd ${beat}
-                make -C auditbeat check
-                make -C auditbeat update
+                make -C ${beat} check
+                make -C ${beat} update
                 make check-no-changes
             """.trimIndent()
         }
         script {
             name = "Build"
             scriptContent = """
+                set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
+                GOPATH=${'$'}GOROOT
                 go version
-                cd ${beat}
-                mage build test
+                mage -C ${beat} build test
             """.trimIndent()
         }
     }
