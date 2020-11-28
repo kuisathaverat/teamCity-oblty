@@ -19,6 +19,7 @@ package beats
 
 import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 import shared.*
 
 val operatingSystems = listOf(
@@ -51,7 +52,6 @@ val beatOthers =  listOf(
         "x-pack/libbeat",
         "dev-tools"
         )
-val beatsMain = BeatsMain()
 
 class BeatsProject: Project({
     id("beats_project")
@@ -63,16 +63,45 @@ class BeatsProject: Project({
 
     defaultTemplate = DefaultTemplate
 
-    buildType(beatsMain)
-    beat.forEach{ beat ->
-        subProject(BeatProject(beat))
+    beatsBranches.forEach { branch ->
+        subProject(BeatBranchProject(branch))
     }
+    //subProject(BeatPRsProject())
+    vcsRoot(BeatsVcs)
+})
+
+class BeatPRsProject(): Project({
+    id("beats_prs".toId())
+    name = "PullRequest"
+
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
+    beatsPulls.forEach { pull ->
+        subProject(BeatBranchProject("pull/${pull}"))
+    }
+})
+
+class BeatBranchProject(var branch: String): Project({
+    id("beats_${branch}".toId())
+    name = "${branch}"
+
+    params {
+        param("teamcity.ui.settings.readOnly", "true")
+    }
+
+    var beatsMain = BeatsMain(branch)
+    buildType(beatsMain)
+
+    beat.forEach{ beat ->
+        subProject(BeatProject(beat, beatsMain))
+    }
+
     beatOthers.forEach{
-        val bt = BeatsBuild(it, "ubuntu-18")
+        val bt = BeatsBuild(it, "ubuntu-18", beatsMain.ref)
         buildType(bt)
         beatsMain.dependsOn(bt)
     }
-
-    vcsRoot(BeatsVcs)
 })
 

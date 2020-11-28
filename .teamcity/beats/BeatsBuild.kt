@@ -18,10 +18,9 @@ package beats
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
-class BeatsBuild(val beat: String, var os: String) : BuildType({
-    id("beats_buils_${beat}_${os}".toId())
+class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
+    id("beats_build_${beat}_${os}_${ref}".toId())
     name = "Beats - ${beat} - ${os}"
 
     features {
@@ -100,11 +99,5 @@ class BeatsBuild(val beat: String, var os: String) : BuildType({
 
     requirements {
         contains("teamcity.agent.name", "apm-ci-ubuntu-18")
-    }
-
-    triggers {
-        vcs {
-            groupCheckinsByCommitter = true
-        }
     }
 })

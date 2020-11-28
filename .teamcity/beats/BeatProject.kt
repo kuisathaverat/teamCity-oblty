@@ -19,10 +19,9 @@ package beats
 import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
-import shared.TestAgent
 
-class BeatProject(var beat: String): Project({
-    id("beats_project_${beat}".toId())
+class BeatProject(var beat: String, beatsMain: BeatsMain): Project({
+    id("beats_project_${beat}_${beatsMain.ref}".toId())
     name = "${beat}"
 
     params {
@@ -30,7 +29,7 @@ class BeatProject(var beat: String): Project({
     }
 
     operatingSystems.forEach{ os ->
-        val bt = BeatsBuild("${beat}", "${os}")
+        val bt = BeatsBuild("${beat}", "${os}", beatsMain.ref)
         buildType(bt)
         beatsMain.dependsOn(bt)
     }

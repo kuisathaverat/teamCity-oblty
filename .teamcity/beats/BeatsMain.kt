@@ -22,10 +22,11 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
-class BeatsMain : BuildType({
-    id("beats_main".toId())
-    name = "Beats - Main"
-    description = "Beats main job"
+class BeatsMain(var ref: String) : BuildType({
+    id("beats_main_${ref}".toId())
+    name = "Beats - Main - ${ref}"
+    description = "Beats main job - ${ref}"
+    var ref = ref
 
     steps {
         script {
@@ -48,6 +49,7 @@ class BeatsMain : BuildType({
     triggers {
         vcs {
             groupCheckinsByCommitter = true
+            branchFilter = "+:${ref}"
         }
     }
 })
