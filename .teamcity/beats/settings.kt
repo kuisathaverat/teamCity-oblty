@@ -66,7 +66,7 @@ class BeatsProject: Project({
     beatsBranches.forEach { branch ->
         subProject(BeatBranchProject(branch))
     }
-    //subProject(BeatPRsProject())
+    subProject(BeatPRsProject())
     vcsRoot(BeatsVcs)
 })
 
