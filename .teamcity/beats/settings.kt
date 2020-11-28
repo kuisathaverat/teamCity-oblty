@@ -64,7 +64,9 @@ class BeatsProject: Project({
     beatsBranches.forEach { branch ->
         subProject(BeatBranchProject(branch))
     }
-    subProject(BeatPRsProject())
+    subProject(BeatBranchProject("pull/*"))
+    // TODO try to fix the java.lang.OutOfMemoryError: Java heap space error
+    //subProject(BeatPRsProject())
     vcsRoot(BeatsVcs)
 })
 
