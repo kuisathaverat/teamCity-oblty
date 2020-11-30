@@ -20,7 +20,7 @@ import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 
-class BeatProject(var beat: String, beatsMain: BeatsMain): Project({
+class BeatProject(var beat: String, beatsMain: BeatsMain, operatingSystems: List<String>): Project({
     id("beats_project_${beat}_${beatsMain.ref}".toId())
     name = "${beat}"
 

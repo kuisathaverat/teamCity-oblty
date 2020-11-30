@@ -21,11 +21,24 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import shared.*
 
 val operatingSystems = listOf(
+        /*
         "centos-6", "centos-7", "centos-8",
         "debian-8", "debian-9", "debian-10",
-        "ubuntu-14","ubuntu-16","ubuntu-18","ubuntu-20",
-        "windows7-32bits","windows7","windows8","windows10","windows2008","windows2012","windows2016","windows2019"
+        "ubuntu-14","ubuntu-16",
+        */
+        "ubuntu-18",
+        /*
+        "ubuntu-20",
+         */
+        "windows7-32bits","windows7","windows8","windows10","windows2008","windows2012","windows2016","windows2019",
+        "masOS"
         )
+
+val operatingSystemsPrs = listOf(
+        "ubuntu-18",
+        "windows2019"
+)
+
 val beat = listOf(
         "auditbeat",
         "filebeat",
@@ -62,11 +75,11 @@ class BeatsProject: Project({
     defaultTemplate = DefaultTemplate
 
     beatsBranches.forEach { branch ->
-        subProject(BeatBranchProject(branch))
+        subProject(BeatBranchProject(branch, operatingSystemsPrs))
     }
-    subProject(BeatBranchProject("pull/*"))
+    //subProject(BeatBranchProject("pull/*", operatingSystemsPrs))
     // TODO try to fix the java.lang.OutOfMemoryError: Java heap space error
-    //subProject(BeatPRsProject())
+    subProject(BeatPRsProject())
     vcsRoot(BeatsVcs)
 })
 

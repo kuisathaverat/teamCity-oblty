@@ -28,6 +28,6 @@ class BeatPRsProject(): Project({
     }
 
     beatsPulls.forEach { pull ->
-        subProject(BeatBranchProject("pull/${pull}"))
+        subProject(BeatBranchProject("pull/${pull}", operatingSystemsPrs))
     }
 })

@@ -20,7 +20,7 @@ import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 
-class BeatBranchProject(var branch: String): Project({
+class BeatBranchProject(var branch: String, operatingSystemsPrs: List<String>): Project({
     id("beats_${branch}".toId())
     name = "${branch}"
 
@@ -32,7 +32,7 @@ class BeatBranchProject(var branch: String): Project({
     buildType(beatsMain)
 
     beat.forEach{ beat ->
-        subProject(BeatProject(beat, beatsMain))
+        subProject(BeatProject(beat, beatsMain, operatingSystems))
     }
 
     beatOthers.forEach{
