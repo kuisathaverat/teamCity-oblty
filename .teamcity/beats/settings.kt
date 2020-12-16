@@ -75,7 +75,7 @@ class BeatsProject: Project({
     defaultTemplate = DefaultTemplate
 
     beatsBranches.forEach { branch ->
-        subProject(BeatBranchProject(branch, operatingSystemsPrs))
+        subProject(BeatBranchProject("*/${branch}", operatingSystemsPrs))
     }
     subProject(BeatBranchProject("pull/*", operatingSystemsPrs))
     // TODO try to fix the java.lang.OutOfMemoryError: Java heap space error

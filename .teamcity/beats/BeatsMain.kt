@@ -49,7 +49,7 @@ class BeatsMain(var ref: String) : BuildType({
     triggers {
         vcs {
             groupCheckinsByCommitter = true
-            branchFilter = "+:*${ref}"
+            branchFilter = "+:${ref}"
         }
     }
 })
