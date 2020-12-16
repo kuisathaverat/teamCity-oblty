@@ -14,7 +14,7 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package beats
+package shared
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
@@ -22,11 +22,9 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
-class BeatsMain(var ref: String) : BuildType({
-    id("beats_main_${ref}".toId())
-    name = "Beats - Main - ${ref}"
-    description = "Beats main job - ${ref}"
-    var ref = ref
+class TestManualConfig() : BuildType({
+    id("test_manual_conf".toId())
+    name = "Test - Manual configuration"
 
     steps {
         script {
@@ -37,19 +35,5 @@ class BeatsMain(var ref: String) : BuildType({
 
     requirements {
         contains("teamcity.agent.name", "apm-ci-ubuntu-18")
-    }
-
-    vcs {
-        root(BeatsVcs)
-        checkoutMode = CheckoutMode.ON_AGENT
-        checkoutDir = "src"
-        cleanCheckout = true
-    }
-
-    triggers {
-        vcs {
-            groupCheckinsByCommitter = true
-            branchFilter = "+:*/${ref}"
-        }
     }
 })

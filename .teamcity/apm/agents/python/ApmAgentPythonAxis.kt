@@ -19,10 +19,8 @@ package apm.agents.python
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2019_2.ParameterDisplay
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
     id("APM_agent_Python_${os}_${python}".toId())
@@ -30,13 +28,6 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
 
     params {
         password("env.TEST", "SuPeRSeCrEt", display = ParameterDisplay.HIDDEN)
-    }
-
-    vcs {
-        root(ApmAgentPythonVcs)
-        checkoutMode = CheckoutMode.ON_AGENT
-        checkoutDir = "src"
-        cleanCheckout = true
     }
 
     features {
@@ -77,12 +68,6 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
                 """.trimIndent()
                 }
             }
-        }
-    }
-
-    triggers {
-        vcs {
-            groupCheckinsByCommitter = true
         }
     }
 
