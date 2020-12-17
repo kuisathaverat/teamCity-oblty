@@ -58,7 +58,6 @@ class SharedProject: Project({
     defaultTemplate = DefaultTemplate
 
     buildType(main)
-    buildType(TestManualConfig())
 
     p10.forEach { syncA.dependsOn(it) }
     p20.forEach { syncB.dependsOn(it) }

@@ -20,6 +20,7 @@ import beats.BeatsProject
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import shared.DefaultTemplate
 import shared.SharedProject
+import shared.TestManualConfig
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -51,6 +52,8 @@ project {
     }
 
     template(DefaultTemplate)
+
+    buildType(TestManualConfig())
 
     subProject(ApmProject())
     subProject(BeatsProject())
