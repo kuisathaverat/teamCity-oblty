@@ -17,14 +17,16 @@
 package shared
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2019_2.CheckoutMode
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.toId
-import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 class TestManualConfig() : BuildType({
     id("test_manual_conf".toId())
     name = "Test - Manual configuration"
+
+    params {
+        param("teamcity.ui.settings.readOnly", "false")
+    }
 
     steps {
         script {
