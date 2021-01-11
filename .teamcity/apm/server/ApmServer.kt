@@ -38,7 +38,7 @@ class ApmServer() : BuildType ({
     features {
         /*
         pullRequests {
-            vcsRootExtId = "${BeatsVcs.id}"
+            vcsRootExtId = "${ApmServerVcs.id}"
             provider = github {
                 authType = token {
                     token = "%env.GITHUB_TOKEN%"

@@ -68,7 +68,7 @@ class ApmAgentPythonMain : BuildType({
 
     features {
         pullRequests {
-            vcsRootExtId = "${BeatsVcs.id}"
+            vcsRootExtId = "${ApmAgentPythonVcs.id}"
             provider = github {
                 authType = token {
                     token = "%env.GITHUB_TOKEN%"
