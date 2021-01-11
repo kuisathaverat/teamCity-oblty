@@ -17,6 +17,8 @@
 package beats
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.PullRequests
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
@@ -28,6 +30,16 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             type = "xml-report-plugin"
             param("xmlReportParsing.reportType", "junit")
             param("xmlReportParsing.reportDirs", "+:**/build/TEST*.xml")
+        }
+        pullRequests {
+            vcsRootExtId = "${BeatsVcs.id}"
+            provider = github {
+                authType = token {
+                    token = "credentialsJSON:ddbf52f3-4b1c-47f7-a051-c1f37de05fd6"
+                }
+                filterTargetBranch = "+:${ref}"
+                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
+            }
         }
     }
 
