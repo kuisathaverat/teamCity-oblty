@@ -34,8 +34,18 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
     vcs {
         root(BeatsVcs)
         checkoutMode = CheckoutMode.ON_AGENT
-        checkoutDir = "src"
+        checkoutDir = "src/github.com/elastic/beats"
         cleanCheckout = true
+    }
+
+    params {
+        param("env.TC_WS", "%teamcity.agent.work.dir%")
+
+        // For now these are just to ensure compatibility with existing Jenkins-based configuration
+        param("env.JENKINS_URL", "%teamcity.serverUrl%")
+        param("env.BUILD_URL", "%teamcity.serverUrl%/build/%teamcity.build.id%")
+        param("env.JOB_NAME", "%system.teamcity.buildType.id%")
+        param("env.GIT_BRANCH", "%vcsroot.branch%")
     }
 
     steps {
@@ -43,7 +53,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             name = "Install gvm"
             scriptContent = """
                 set -e
-                export HOME=${'$'}(pwd)
+                export HOME=${'$'}{TC_WS}
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin
                 BIN=${'$'}{HOME}/bin
                 mkdir -p ${'$'}{BIN}
@@ -55,7 +65,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             name = "Install Go"
             scriptContent = """
                 set -e
-                export HOME=${'$'}(pwd)
+                export HOME=${'$'}{TC_WS}
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
@@ -68,7 +78,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             name = "Lint"
             scriptContent = """
                 set -e
-                export HOME=${'$'}(pwd)
+                export HOME=${'$'}{TC_WS}
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
                 export PYTHON_ENV=${'$'}{HOME}/python-env
                 BIN=${'$'}{HOME}/bin
@@ -85,7 +95,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             name = "Build"
             scriptContent = """
                 set -e
-                export HOME=${'$'}(pwd)
+                export HOME=${'$'}{TC_WS}
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
                 export PYTHON_ENV=${'$'}{HOME}/python-env
                 BIN=${'$'}{HOME}/bin
