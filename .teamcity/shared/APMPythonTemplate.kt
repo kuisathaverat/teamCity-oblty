@@ -31,7 +31,7 @@ object APMPythonTemplate: Template({
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
-        password("env.GITHUB_TOKEN", "credentialsJSON:ddbf52f3-4b1c-47f7-a051-c1f37de05fd6", display = ParameterDisplay.HIDDEN)
+        password("env.GITHUB_TOKEN", "credentialsJSON:fea3d2a6-ce76-4280-a1b8-ddcb04bee79d", display = ParameterDisplay.HIDDEN)
     }
 
     features {
@@ -40,7 +40,7 @@ object APMPythonTemplate: Template({
             vcsRootExtId = "${ApmAgentPythonVcs.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:ddbf52f3-4b1c-47f7-a051-c1f37de05fd6"
+                    token = "credentialsJSON:fea3d2a6-ce76-4280-a1b8-ddcb04bee79d"
                 }
                 filterTargetBranch = "+:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
