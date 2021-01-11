@@ -31,7 +31,13 @@ class TestManualConfig() : BuildType({
     steps {
         script {
             name = "shell"
-            scriptContent = """dd if=/dev/urandom bs=1k count=100 |base64"""
+
+            conditions {
+                equals("teamcity.build.branch.is_default", "true")
+                equals("teamcity.build.branch", "release")
+                equals("parameter", "foo")
+            }
+            scriptContent = "dd if=/dev/urandom bs=1k count=100 |base64"
         }
     }
 

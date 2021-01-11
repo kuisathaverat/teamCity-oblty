@@ -49,7 +49,6 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 mkdir -p ${'$'}{BIN}
                 curl -sL -o ${'$'}{BIN}/gvm https://github.com/andrewkroh/gvm/releases/download/v0.2.0/gvm-linux-amd64
                 chmod +x ${'$'}{BIN}/gvm
-                ls -la
             """.trimIndent()
         }
         script {
@@ -71,11 +70,12 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
-                PYTHON_ENV=${'$'}{HOME}/python-env
+                export PYTHON_ENV=${'$'}{HOME}/python-env
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=$(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
                 go version
+                python3 --version
                 make -C ${beat} check
                 make -C ${beat} update
                 make check-no-changes
@@ -87,7 +87,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 set -e
                 export HOME=${'$'}(pwd)
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
-                PYTHON_ENV=${'$'}{HOME}/python-env
+                export PYTHON_ENV=${'$'}{HOME}/python-env
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
