@@ -80,6 +80,7 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
     }
 
     features {
+        /*
         pullRequests {
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
@@ -90,5 +91,7 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
+
+         */
     }
 })

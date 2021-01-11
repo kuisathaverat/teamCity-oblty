@@ -67,6 +67,7 @@ class ApmAgentPythonMain : BuildType({
     }
 
     features {
+        /*
         pullRequests {
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
@@ -77,5 +78,6 @@ class ApmAgentPythonMain : BuildType({
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
+         */
     }
 })

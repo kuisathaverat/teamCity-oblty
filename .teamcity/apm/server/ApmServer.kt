@@ -36,6 +36,7 @@ class ApmServer() : BuildType ({
     }
 
     features {
+        /*
         pullRequests {
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
@@ -46,6 +47,7 @@ class ApmServer() : BuildType ({
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
+         */
     }
 
     steps {

@@ -56,6 +56,7 @@ class BeatsMain(var ref: String) : BuildType({
     }
 
     features {
+        /*
         pullRequests {
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
@@ -66,5 +67,6 @@ class BeatsMain(var ref: String) : BuildType({
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
+        */
     }
 })

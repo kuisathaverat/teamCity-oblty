@@ -31,6 +31,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
             param("xmlReportParsing.reportType", "junit")
             param("xmlReportParsing.reportDirs", "+:**/build/TEST*.xml")
         }
+        /*
         pullRequests {
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
@@ -40,7 +41,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 filterTargetBranch = "+:${ref}"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
-        }
+        }*/
     }
 
     vcs {
