@@ -18,6 +18,7 @@
 import apm.ApmProject
 import beats.BeatsProject
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import shared.APMPythonTemplate
 import shared.DefaultTemplate
 import shared.SharedProject
 import shared.TestManualConfig
@@ -52,6 +53,7 @@ project {
     }
 
     template(DefaultTemplate)
+    template(APMPythonTemplate)
 
     buildType(TestManualConfig())
 
