@@ -92,7 +92,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
                 go version
-                mage -C ${beat} build test
+                mage -d ${beat} build test
             """.trimIndent()
         }
     }
