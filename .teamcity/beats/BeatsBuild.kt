@@ -45,7 +45,7 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
         param("env.JENKINS_URL", "%teamcity.serverUrl%")
         param("env.BUILD_URL", "%teamcity.serverUrl%/build/%teamcity.build.id%")
         param("env.JOB_NAME", "%system.teamcity.buildType.id%")
-        param("env.GIT_BRANCH", "%vcsroot.branch%")
+        //param("env.GIT_BRANCH", "%vcsroot.branch%")
     }
 
     steps {
