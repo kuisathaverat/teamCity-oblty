@@ -26,7 +26,7 @@ val operatingSystems = listOf(
         "debian-8", "debian-9", "debian-10",
         "ubuntu-14","ubuntu-16",
         */
-        "ubuntu-18",
+        "ubuntu-20",
         /*
         "ubuntu-20",
          */
@@ -35,7 +35,7 @@ val operatingSystems = listOf(
         )
 
 val operatingSystemsPrs = listOf(
-        "ubuntu-18",
+        "ubuntu-20",
         "windows2019"
 )
 

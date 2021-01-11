@@ -32,6 +32,6 @@ class TestAgent(val idArg: String) : BuildType({
     }
 
     requirements {
-        contains("teamcity.agent.name", "apm-ci-ubuntu-18")
+        contains("teamcity.agent.name", "apm-ci-ubuntu-20")
     }
 })

@@ -79,7 +79,7 @@ project {
         }
 
         feature {
-            id = "observability-ci-ubuntu-1804-lts"
+            id = "observability-ci-ubuntu-2004-lts"
             type = "CloudImage"
             param("network", "teamcity")
             param("subnet", "teamcity")
@@ -88,7 +88,7 @@ project {
             param("preemptible", "false")
             param("sourceProject", "elastic-images-prod")
             param("sourceImageFamily", "elastic-beats-ci-ubuntu-2004-lts")
-            param("source-id", "elastic-apm-ci-ubuntu-1804-lts")
+            param("source-id", "elastic-apm-ci-ubuntu-2004-lts")
             param("zone", "us-central1-a")
             param("profileId", "Observability")
             param("diskType", "pd-ssd")

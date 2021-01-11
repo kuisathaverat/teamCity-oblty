@@ -36,7 +36,7 @@ class BeatBranchProject(var branch: String, operatingSystemsPrs: List<String>): 
     }
 
     beatOthers.forEach{
-        val bt = BeatsBuild(it, "ubuntu-18", beatsMain.ref)
+        val bt = BeatsBuild(it, "ubuntu-20", beatsMain.ref)
         buildType(bt)
         beatsMain.dependsOn(bt)
     }
