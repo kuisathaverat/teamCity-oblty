@@ -65,17 +65,4 @@ class ApmAgentPythonMain : BuildType({
             branchFilter = "+:*"
         }
     }
-
-    features {
-        pullRequests {
-            vcsRootExtId = "${ApmAgentPythonVcs.id}"
-            provider = github {
-                authType = token {
-                    token = "%env.GITHUB_TOKEN%"
-                }
-                filterTargetBranch = "+:refs/heads/master"
-                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
-            }
-        }
-    }
 })

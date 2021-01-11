@@ -19,6 +19,7 @@ package apm.agents.python
 
 import dependsOn
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import shared.APMPythonTemplate
 import shared.DefaultTemplate
 
 val operatingSystems = listOf("Mac OS X", "Windows", "Linux")
@@ -262,7 +263,7 @@ class ApmAgentPythonProject: Project ({
         param("teamcity.ui.settings.readOnly", "true")
     }
 
-    defaultTemplate = DefaultTemplate
+    defaultTemplate = APMPythonTemplate
 
     vcsRoot(ApmAgentPythonVcs)
 
