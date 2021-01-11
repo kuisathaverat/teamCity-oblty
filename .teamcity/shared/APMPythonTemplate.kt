@@ -27,7 +27,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.pullRequests
 
 object APMPythonTemplate: Template({
-    name = "Default Template"
+    name = "APM Python Template"
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
