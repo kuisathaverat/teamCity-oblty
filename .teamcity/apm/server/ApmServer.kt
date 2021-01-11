@@ -40,7 +40,7 @@ class ApmServer() : BuildType ({
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:dfb790bf-8b34-4aa5-91b0-7b7c2979433a"
+                    token = "%env.GITHUB_TOKEN%"
                 }
                 filterTargetBranch = "++:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
