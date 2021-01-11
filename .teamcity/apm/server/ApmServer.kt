@@ -43,7 +43,7 @@ class ApmServer() : BuildType ({
                 authType = token {
                     token = "%env.GITHUB_TOKEN%"
                 }
-                filterTargetBranch = "++:refs/heads/master"
+                filterTargetBranch = "+:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }

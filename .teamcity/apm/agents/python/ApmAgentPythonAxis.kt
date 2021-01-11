@@ -87,7 +87,7 @@ class ApmAgentPythonAxis(val os: String, val python: String) : BuildType({
                 authType = token {
                     token = "%env.GITHUB_TOKEN%"
                 }
-                filterTargetBranch = "++:refs/heads/master"
+                filterTargetBranch = "+:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
