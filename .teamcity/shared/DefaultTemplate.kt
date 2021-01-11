@@ -28,8 +28,7 @@ object DefaultTemplate: Template({
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
-//        password("env.GITHUB_TOKEN", "credentialsJSON:dfb790bf-8b34-4aa5-91b0-7b7c2979433a", display = ParameterDisplay.HIDDEN)
-        password("env.GITHUB_TOKEN", "aa84120bc315b77b907e3971c1a4ab34d9ad07ae", display = ParameterDisplay.HIDDEN)
+        password("env.GITHUB_TOKEN", "credentialsJSON:dfb790bf-8b34-4aa5-91b0-7b7c2979433a", display = ParameterDisplay.HIDDEN)
     }
 
     features {
