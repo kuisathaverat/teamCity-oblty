@@ -98,6 +98,8 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 export HOME=${'$'}{TC_WS}
                 export PATH=${'$'}{PATH}:${'$'}{HOME}/bin:${'$'}{HOME}/.ci/scripts:${'$'}{HOME}/.local/bin:${'$'}{HOME}/go/bin
                 export PYTHON_ENV=${'$'}{HOME}/python-env
+                export CGO_ENABLED=0
+                export GOPATH=${'$'}{HOME}
                 BIN=${'$'}{HOME}/bin
                 GO_VERSION=${'$'}(cat .go-version)
                 eval "${'$'}(gvm ${'$'}GO_VERSION)"
