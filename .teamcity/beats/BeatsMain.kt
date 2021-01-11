@@ -60,7 +60,7 @@ class BeatsMain(var ref: String) : BuildType({
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:c1fd7c33-38c1-441d-b6b5-0777c34140eb"
+                    token = "secure:credentialsJSON:c1fd7c33-38c1-441d-b6b5-0777c34140eb"
                 }
                 filterTargetBranch = "+:${ref}"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
