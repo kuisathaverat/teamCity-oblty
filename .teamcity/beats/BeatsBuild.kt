@@ -107,7 +107,8 @@ class BeatsBuild(val beat: String, var os: String, ref: String) : BuildType({
                 export | grep GO
                 echo "HOME=${'$'}HOME"
                 echo "PATH=${'$'}PATH"
-                mage -d ${beat} build test
+                cd ${beat}
+                mage build test
             """.trimIndent()
         }
     }
