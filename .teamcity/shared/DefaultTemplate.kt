@@ -19,6 +19,7 @@
 
 package shared
 
+import jetbrains.buildServer.configs.kotlin.v2019_2.ParameterDisplay
 import jetbrains.buildServer.configs.kotlin.v2019_2.Template
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.perfmon
 
@@ -27,6 +28,7 @@ object DefaultTemplate: Template({
 
     params {
         param("teamcity.ui.settings.readOnly", "true")
+        password("github.token", "credentialsJSON:c1fd7c33-38c1-441d-b6b5-0777c34140eb", display = ParameterDisplay.HIDDEN)
     }
 
     features {

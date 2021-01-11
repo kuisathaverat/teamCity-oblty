@@ -71,7 +71,7 @@ class ApmAgentPythonMain : BuildType({
             vcsRootExtId = "${BeatsVcs.id}"
             provider = github {
                 authType = token {
-                    token = "secure:credentialsJSON:c1fd7c33-38c1-441d-b6b5-0777c34140eb"
+                    token = DslContext.getParameter("github.token")
                 }
                 filterTargetBranch = "++:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
