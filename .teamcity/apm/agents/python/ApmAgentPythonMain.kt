@@ -26,7 +26,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 class ApmAgentPythonMain : BuildType({
     name = "APM Agent Python"
-    description = "Run all Build configurations"
+    description = "Run all Build configurations."
 
     params {
         password("env.TEST", "SuPeRSeCrEt", display = ParameterDisplay.HIDDEN)
