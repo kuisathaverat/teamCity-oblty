@@ -42,14 +42,16 @@ class TestAgentMain : BuildType({
         onDependencyCancel = FailureAction.ADD_PROBLEM
     }
 
+    /* DISABLED
     triggers {
         schedule {
             schedulingPolicy = cron {
-                minutes = "*/10"
+                minutes = "* /10"
             }
             branchFilter = ""
             triggerBuild = always()
             withPendingChangesOnly = false
         }
     }
+    */
 })
